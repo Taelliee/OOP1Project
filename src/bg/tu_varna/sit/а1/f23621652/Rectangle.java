@@ -1,6 +1,6 @@
 package bg.tu_varna.sit.а1.f23621652;
 
-public class Rectangle implements SVGObject{ // <rect>
+public class Rectangle extends SVGObject{ // <rect>
     private Point topLeftPoint;
     private Point cornerRadius;
     private double width;

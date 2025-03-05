@@ -1,6 +1,6 @@
 package bg.tu_varna.sit.а1.f23621652;
 
-public class Circle implements SVGObject{
+public class Circle extends SVGObject{
     private double radius;
     private Point centrePoint;
     // private String fill = "black";
@@ -37,5 +37,12 @@ public class Circle implements SVGObject{
         this.centrePoint = centrePoint;
     }
 
-    //ToString()..
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Circle ");
+        sb.append("radius=").append(radius);
+        sb.append(", centrePoint=").append(centrePoint);
+        sb.append(super.toString());
+        return sb.toString();
+    }
 }

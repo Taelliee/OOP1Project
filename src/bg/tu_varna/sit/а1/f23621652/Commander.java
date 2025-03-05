@@ -3,13 +3,14 @@ package bg.tu_varna.sit.а1.f23621652;
 import java.util.*;
 
 public class Commander {
-    private static String mainMenu = "The following commands are supported:\n" +
-            "open <file> \topens <file>\n" +
-            "close \tcloses currently opened file\n" +
-            "save \tsaves the currently open file\n" +
-            "saveas <file> \tsaves the currently open file in <file>\n" +
-            "help \tprints this information\n" +
-            "exit \texists the program";
+    private final static StringBuilder mainMenu = new StringBuilder()
+            .append("The following commands are supported:\n")
+            .append("open <file>    opens <file>\n")
+            .append("close          closes currently opened file\n")
+            .append("save           saves the currently open file\n")
+            .append("saveas <file>  saves the currently open file in <file>\n")
+            .append("help           prints this information\n")
+            .append("exit           exits the program");
 
     public static void chooseCommand(){
         System.out.print("Write your command: \n> ");
@@ -29,6 +30,20 @@ public class Commander {
                 break;
             case "help":
                 System.out.println(mainMenu);
+                break;
+            case "print":
+                break;
+            case "create":
+                FigureHelper.addSVGFigure();
+                break;
+            case "erase": //<n>
+                FigureHelper.eraseSVGFigure(0); //change n
+                break;
+            case "translate ": //[<n>]
+                FigureHelper.translateSVGFigure();
+                break;
+            case "within ": //<option>
+                FigureHelper.printFiguresWithin();
                 break;
             default:
                 System.out.println("This command is not on the list. ");

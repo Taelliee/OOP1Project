@@ -1,10 +1,10 @@
 package bg.tu_varna.sit.а1.f23621652;
 
 public class Point {
-    private double x;
-    private double y;
+    private int x;
+    private int y;
 
-    public Point(double x, double y) {
+    public Point(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -13,7 +13,7 @@ public class Point {
         return x;
     }
 
-    public void setX(double x) {
+    public void setX(int x) {
         this.x = x;
     }
 
@@ -21,15 +21,15 @@ public class Point {
         return y;
     }
 
-    public void setY(double y) {
+    public void setY(int y) {
         this.y = y;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("x= ").append(x);
-        sb.append("y= ").append(y);
+        StringBuilder sb = new StringBuilder();
+        sb.append('(').append(x);
+        sb.append(", ").append(y).append(')');
         return sb.toString();
     }
 }
