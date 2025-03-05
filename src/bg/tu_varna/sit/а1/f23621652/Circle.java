@@ -1,17 +1,17 @@
 package bg.tu_varna.sit.а1.f23621652;
 
-public class Circle extends SVGObject{
+public class Circle extends SVGShape {
     private double radius;
     private Point centrePoint;
     // private String fill = "black";
     // private String style;
 
-    public Circle(double radius) throws SVGObjectException{
+    public Circle(double radius) throws SVGShapeException {
         setRadius(radius);
         this.centrePoint = new Point(0,0);
     }
 
-    public Circle(double radius, Point centrePoint) throws SVGObjectException{
+    public Circle(double radius, Point centrePoint) throws SVGShapeException {
         setRadius(radius);
         this.centrePoint = centrePoint;
     }
@@ -20,9 +20,9 @@ public class Circle extends SVGObject{
         return radius;
     }
 
-    public void setRadius(double radius) throws SVGObjectException{
+    public void setRadius(double radius) throws SVGShapeException {
         if(NegativeValueChecker.isValueNegative(radius)) {
-            throw new SVGObjectException(NegativeValueChecker.message);
+            throw new SVGShapeException(NegativeValueChecker.message);
         }
         else {
             this.radius = radius;

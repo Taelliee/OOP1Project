@@ -1,6 +1,6 @@
 package bg.tu_varna.sit.а1.f23621652;
 
-public class Line extends SVGObject {
+public class Line extends SVGShape {
     private Point startPoint;
     private Point endPoint;
     //private String style;

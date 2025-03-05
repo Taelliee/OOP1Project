@@ -34,16 +34,16 @@ public class Commander {
             case "print":
                 break;
             case "create":
-                FigureHelper.addSVGFigure();
+                ShapeHelper.addShape();
                 break;
             case "erase": //<n>
-                FigureHelper.eraseSVGFigure(0); //change n
+                ShapeHelper.eraseShape(0); //change n
                 break;
             case "translate ": //[<n>]
-                FigureHelper.translateSVGFigure();
+                ShapeHelper.translateShape();
                 break;
             case "within ": //<option>
-                FigureHelper.printFiguresWithin();
+                ShapeHelper.printShapesWithin();
                 break;
             default:
                 System.out.println("This command is not on the list. ");
