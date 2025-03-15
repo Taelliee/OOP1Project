@@ -1,17 +1,22 @@
 package bg.tu_varna.sit.а1.f23621652;
 
 public class ShapeHelper {
+    public static void printShapes(){
+        for (SVGShape shape: SVGCanvas.getInstance().getShapes()) {
+            System.out.println(shape);
+        }
+    }
 
     public static void addShape(){
-        //split the attributes, which figure is chosen switch case
+        //split the attributes, which figure is chosen - switchCase/map?
 
-//        try {
-//            SVGShape circle1 = new Circle(100, new Point(0, 0));
-//            circle1.setFill("blue");
-//            System.out.println(circle1);
-//        } catch (SVGShapeException e) {
-//            e.printStackTrace();
-//        }
+        /*try {
+            SVGShape circle1 = new Circle(100, new Point(0, 0));
+            circle1.setFill("blue");
+            System.out.println(circle1);
+        } catch (SVGShapeException e) {
+            e.printStackTrace();
+        } */
     }
 
     public static void eraseShape(int n){
@@ -23,7 +28,7 @@ public class ShapeHelper {
 
     }
 
-    public static String printShapesWithin(){
-        return " ";
+    public static void printShapesWithin(){
+
     }
 }
