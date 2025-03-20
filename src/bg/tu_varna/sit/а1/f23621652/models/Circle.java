@@ -1,4 +1,7 @@
-package bg.tu_varna.sit.а1.f23621652;
+package bg.tu_varna.sit.а1.f23621652.models;
+
+import bg.tu_varna.sit.а1.f23621652.exceptions.NegativeValueChecker;
+import bg.tu_varna.sit.а1.f23621652.exceptions.SVGShapeException;
 
 public class Circle extends SVGShape {
     private double radius;
