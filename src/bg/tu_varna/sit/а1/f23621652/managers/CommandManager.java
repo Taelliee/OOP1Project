@@ -17,7 +17,7 @@ public class CommandManager {
         commands.put(CommandType.HELP, new HelpMenu());
         commands.put(CommandType.EXIT, new ExitProgram());
         commands.put(CommandType.PRINT, new PrintShapes());
-        commands.put(CommandType.CREATE, new AddShape());
+        commands.put(CommandType.CREATE, new CreateShape());
         commands.put(CommandType.ERASE, new EraseShape()); //<n>
         commands.put(CommandType.TRANSLATE, new TranslateShape()); //[<n>]
         commands.put(CommandType.WITHIN, new PrintShapesWithin()); //<option>
@@ -30,10 +30,10 @@ public class CommandManager {
 
         CommandType commandType = CommandType.convertFromText(inputTokens[0]);
         Command command = commands.get(commandType);
-        String argument = inputTokens.length > 1 ? inputTokens[1] : "";
+        //String argument = inputTokens.length > 1 ? inputTokens[1] : "";
 
         if (command != null) {
-            command.execute(argument);
+            command.execute(inputTokens);
         } else {
             System.out.println("This command is not on the list. Type \"help\" for available commands.");
         }

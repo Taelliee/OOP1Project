@@ -1,7 +1,7 @@
 package bg.tu_varna.sit.а1.f23621652.exceptions;
 
 public final class NegativeValueChecker {
-    public static final String message = "";
+    public static final String message = "Values cannot be negative!";
 
     private NegativeValueChecker(){}
 

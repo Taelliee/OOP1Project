@@ -17,7 +17,7 @@ public class HelpMenu implements Command {
             .append("translate [<n>] translates a shape/shapes\n")
             .append("within <option> prints all shapes within a circle or rectangle\n");
     @Override
-    public void execute(String argument) {
+    public void execute(String[] arguments) {
         System.out.println(mainMenu);
     }
 }

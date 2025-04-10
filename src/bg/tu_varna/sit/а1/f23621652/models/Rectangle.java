@@ -1,24 +1,23 @@
 package bg.tu_varna.sit.а1.f23621652.models;
 
 import bg.tu_varna.sit.а1.f23621652.exceptions.NegativeValueChecker;
-import bg.tu_varna.sit.а1.f23621652.exceptions.SVGShapeException;
+import bg.tu_varna.sit.а1.f23621652.exceptions.NegativeValueException;
 
 public class Rectangle extends SVGShape { // <rect>
-    private Point topLeftPoint;
-    private Point cornerRadius;
     private double width;
     private double height;
+    private Point topLeftPoint;
+    private Point cornerRadius;
     // private String fill = "black";
-    // private String style;
 
-    public Rectangle(Point topLeftPoint, double width, double height) throws SVGShapeException {
+    public Rectangle(double width, double height, Point topLeftPoint) throws NegativeValueException {
         this.topLeftPoint = topLeftPoint;
         this.cornerRadius = new Point(0,0);
         setWidth(width);
         setHeight(height);
     }
 
-    public Rectangle(Point topLeftPoint, Point cornerRadius, double width, double height) throws SVGShapeException {
+    public Rectangle(double width, double height, Point topLeftPoint, Point cornerRadius) throws NegativeValueException {
         this.topLeftPoint = topLeftPoint;
         this.cornerRadius = cornerRadius;
         setWidth(width);
@@ -45,9 +44,9 @@ public class Rectangle extends SVGShape { // <rect>
         return width;
     }
 
-    public void setWidth(double width) throws SVGShapeException {
+    public void setWidth(double width) throws NegativeValueException {
         if(NegativeValueChecker.isValueNegative(width)) {
-         throw new SVGShapeException(NegativeValueChecker.message);
+         throw new NegativeValueException(NegativeValueChecker.message);
         }
         else {
             this.width = width;
@@ -58,9 +57,9 @@ public class Rectangle extends SVGShape { // <rect>
         return height;
     }
 
-    public void setHeight(double height) throws SVGShapeException {
+    public void setHeight(double height) throws NegativeValueException {
         if(NegativeValueChecker.isValueNegative(height)) {
-            throw new SVGShapeException(NegativeValueChecker.message);
+            throw new NegativeValueException(NegativeValueChecker.message);
         }
         else {
             this.height = height;
@@ -68,4 +67,15 @@ public class Rectangle extends SVGShape { // <rect>
     }
 
     //ToString()..
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Rectangle ");
+        sb.append("width= ").append(width);
+        sb.append(", height= ").append(height);
+        sb.append(", topLeftPoint= ").append(topLeftPoint);
+        sb.append(", cornerRadius= ").append(cornerRadius);
+        sb.append(super.toString());
+        return sb.toString();
+    }
 }

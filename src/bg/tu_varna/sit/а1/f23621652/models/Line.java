@@ -3,7 +3,6 @@ package bg.tu_varna.sit.а1.f23621652.models;
 public class Line extends SVGShape {
     private Point startPoint;
     private Point endPoint;
-    //private String style;
 
     public Line(Point startPoint, Point endPoint) {
         this.startPoint = startPoint;
@@ -26,5 +25,11 @@ public class Line extends SVGShape {
         this.endPoint = endPoint;
     }
 
-    //ToString()..
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Line ");
+        sb.append("startPoint= ").append(startPoint);
+        sb.append(", endPoint= ").append(endPoint);
+        return sb.toString();
+    }
 }

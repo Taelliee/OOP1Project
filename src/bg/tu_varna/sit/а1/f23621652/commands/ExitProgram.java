@@ -4,7 +4,7 @@ import bg.tu_varna.sit.а1.f23621652.interfaces.Command;
 
 public class ExitProgram implements Command {
     @Override
-    public void execute(String argument) {
+    public void execute(String[] arguments) {
         System.out.println("Exiting the program...");
         //close files, save data
         System.exit(0);
