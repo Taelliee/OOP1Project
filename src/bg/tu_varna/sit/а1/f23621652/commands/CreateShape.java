@@ -10,8 +10,7 @@ public class CreateShape implements Command {
     @Override
     public void execute(String[] arguments) {
         ShapeType shapeType = ShapeType.convertFromText(arguments[1]);
-        int x1, x2, y1, y2, cx, cy;
-        double r, width, height;
+        int x1, x2, y1, y2, cx, cy, r, width, height;
         String fill;
         SVGShape shape = null;
         //examples
@@ -32,7 +31,7 @@ public class CreateShape implements Command {
                 shape = new Line(new Point(x1, y1), new Point(x2, y2));
                 break;
             case CIRCLE:
-                r = Double.parseDouble(arguments[2]);
+                r = Integer.parseInt(arguments[2]);
                 try {
                     switch (arguments.length) {
                         case 3: // circle r
@@ -64,8 +63,8 @@ public class CreateShape implements Command {
                 }
                 break;
             case RECTANGLE:
-                width = Double.parseDouble(arguments[2]);
-                height = Double.parseDouble(arguments[3]);
+                width = Integer.parseInt(arguments[2]);
+                height = Integer.parseInt(arguments[3]);
                 x1 = Integer.parseInt(arguments[4]);
                 y1 = Integer.parseInt(arguments[5]);
 

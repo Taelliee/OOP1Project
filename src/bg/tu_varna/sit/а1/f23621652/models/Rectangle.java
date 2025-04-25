@@ -3,21 +3,24 @@ package bg.tu_varna.sit.а1.f23621652.models;
 import bg.tu_varna.sit.а1.f23621652.exceptions.NegativeValueChecker;
 import bg.tu_varna.sit.а1.f23621652.exceptions.NegativeValueException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Rectangle extends SVGShape { // <rect>
-    private double width;
-    private double height;
+    private int width;
+    private int height;
     private Point topLeftPoint;
     private Point cornerRadius;
     // private String fill = "black";
 
-    public Rectangle(double width, double height, Point topLeftPoint) throws NegativeValueException {
+    public Rectangle(int width, int height, Point topLeftPoint) throws NegativeValueException {
         this.topLeftPoint = topLeftPoint;
         this.cornerRadius = new Point(0,0);
         setWidth(width);
         setHeight(height);
     }
 
-    public Rectangle(double width, double height, Point topLeftPoint, Point cornerRadius) throws NegativeValueException {
+    public Rectangle(int width, int height, Point topLeftPoint, Point cornerRadius) throws NegativeValueException {
         this.topLeftPoint = topLeftPoint;
         this.cornerRadius = cornerRadius;
         setWidth(width);
@@ -40,11 +43,11 @@ public class Rectangle extends SVGShape { // <rect>
         this.cornerRadius = cornerRadius;
     }
 
-    public double getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(double width) throws NegativeValueException {
+    public void setWidth(int width) throws NegativeValueException {
         if(NegativeValueChecker.isValueNegative(width)) {
          throw new NegativeValueException(NegativeValueChecker.message);
         }
@@ -57,13 +60,22 @@ public class Rectangle extends SVGShape { // <rect>
         return height;
     }
 
-    public void setHeight(double height) throws NegativeValueException {
+    public void setHeight(int height) throws NegativeValueException {
         if(NegativeValueChecker.isValueNegative(height)) {
             throw new NegativeValueException(NegativeValueChecker.message);
         }
         else {
             this.height = height;
         }
+    }
+
+    public List<Point> getPoints(){
+        List<Point> points = new ArrayList<Point>();
+        points.add(topLeftPoint);
+        points.add(new Point(topLeftPoint.getX()+width, topLeftPoint.getY()));
+        points.add(new Point(topLeftPoint.getX()+width, topLeftPoint.getY()-height));
+        points.add(new Point(topLeftPoint.getX(), topLeftPoint.getY()-height));
+        return points;
     }
 
     //ToString()..

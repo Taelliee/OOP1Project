@@ -9,7 +9,7 @@ public class Point {
         this.y = y;
     }
 
-    public double getX() {
+    public int getX() {
         return x;
     }
 
@@ -17,7 +17,7 @@ public class Point {
         this.x = x;
     }
 
-    public double getY() {
+    public int getY() {
         return y;
     }
 

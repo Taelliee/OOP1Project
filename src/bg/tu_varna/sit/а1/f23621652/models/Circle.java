@@ -4,25 +4,24 @@ import bg.tu_varna.sit.а1.f23621652.exceptions.NegativeValueChecker;
 import bg.tu_varna.sit.а1.f23621652.exceptions.NegativeValueException;
 
 public class Circle extends SVGShape {
-    private double radius;
+    private int radius;
     private Point centrePoint;
-    // private String fill = "black";
 
-    public Circle(double radius) throws NegativeValueException {
+    public Circle(int radius) throws NegativeValueException {
         setRadius(radius);
         this.centrePoint = new Point(0,0);
     }
 
-    public Circle(double radius, Point centrePoint) throws NegativeValueException {
+    public Circle(int radius, Point centrePoint) throws NegativeValueException {
         setRadius(radius);
         this.centrePoint = centrePoint;
     }
 
-    public double getRadius() {
+    public int getRadius() {
         return radius;
     }
 
-    public void setRadius(double radius) throws NegativeValueException {
+    public void setRadius(int radius) throws NegativeValueException {
         if(NegativeValueChecker.isValueNegative(radius)) {
             throw new NegativeValueException(NegativeValueChecker.message);
         }
