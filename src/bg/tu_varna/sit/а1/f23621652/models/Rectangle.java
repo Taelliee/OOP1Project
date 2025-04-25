@@ -70,11 +70,11 @@ public class Rectangle extends SVGShape { // <rect>
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Rectangle ");
-        sb.append("width= ").append(width);
-        sb.append(", height= ").append(height);
-        sb.append(", topLeftPoint= ").append(topLeftPoint);
-        sb.append(", cornerRadius= ").append(cornerRadius);
+        StringBuilder sb = new StringBuilder("Rectangle\t");
+        sb.append("width: ").append(width);
+        sb.append(", height: ").append(height);
+        sb.append(", topLeftPoint: ").append(topLeftPoint);
+        sb.append(", cornerRadius: ").append(cornerRadius);
         sb.append(super.toString());
         return sb.toString();
     }

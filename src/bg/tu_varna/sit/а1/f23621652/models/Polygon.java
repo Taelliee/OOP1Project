@@ -15,10 +15,8 @@ public class Polygon extends SVGShape { // <polygon>
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Polygon with points: ");
-        sb.append(points);
+        final StringBuilder sb = new StringBuilder("Polygon\t\t");
+        sb.append("points: ").append(points);
         return sb.toString();
     }
-
-    //ToString()..
 }

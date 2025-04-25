@@ -27,9 +27,9 @@ public class Line extends SVGShape {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Line ");
-        sb.append("startPoint= ").append(startPoint);
-        sb.append(", endPoint= ").append(endPoint);
+        StringBuilder sb = new StringBuilder("Line\t\t\t");
+        sb.append("startPoint: ").append(startPoint);
+        sb.append(", endPoint: ").append(endPoint);
         return sb.toString();
     }
 }

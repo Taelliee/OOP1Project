@@ -1,38 +1,37 @@
 package bg.tu_varna.sit.а1.f23621652.commands;
 
 import bg.tu_varna.sit.а1.f23621652.SVGCanvas;
+import bg.tu_varna.sit.а1.f23621652.enums.ShapeType;
 import bg.tu_varna.sit.а1.f23621652.exceptions.NegativeValueException;
 import bg.tu_varna.sit.а1.f23621652.interfaces.Command;
 import bg.tu_varna.sit.а1.f23621652.models.*;
-import bg.tu_varna.sit.а1.f23621652.models.Point;
-import bg.tu_varna.sit.а1.f23621652.models.Polygon;
 
 public class CreateShape implements Command {
     @Override
     public void execute(String[] arguments) {
-        String shapeName = arguments[1].toLowerCase();
+        ShapeType shapeType = ShapeType.convertFromText(arguments[1]);
         int x1, x2, y1, y2, cx, cy;
         double r, width, height;
         String fill;
         SVGShape shape = null;
         //examples
-        //1. rectangle 5 5 10 10 green
-        //2. circle 5 5 10 blue
-        //3. rectangle 100 60 10 10
-        //4. line 0 0 300 200
-        //5. polygon 100,10 150,190 50,190
+        //1. create rectangle 5 5 -10 10 green
+        //2. create circle 10 5 5 blue
+        //3. create rectangle 10 10 100 -60
+        //4. create line 0 0 300 200
+        //5. create polygon 100,10 150,190 50,190
 
-        // > create rectangle -1000 -1000 10 20 yellow
-        // Successfully created rectangle (4)
-        switch (shapeName){
-            case "line":
+        // > create rectangle 10 20 -1000 -1000 yellow
+        // Successfully created rectangle (index)
+        switch (shapeType){
+            case LINE:
                 x1 = Integer.parseInt(arguments[2]);
                 y1 = Integer.parseInt(arguments[3]);
                 x2 = Integer.parseInt(arguments[4]);
                 y2 = Integer.parseInt(arguments[5]);
                 shape = new Line(new Point(x1, y1), new Point(x2, y2));
                 break;
-            case "circle":
+            case CIRCLE:
                 r = Double.parseDouble(arguments[2]);
                 try {
                     switch (arguments.length) {
@@ -64,7 +63,7 @@ public class CreateShape implements Command {
                     System.out.println(e.getMessage());
                 }
                 break;
-            case "rectangle":
+            case RECTANGLE:
                 width = Double.parseDouble(arguments[2]);
                 height = Double.parseDouble(arguments[3]);
                 x1 = Integer.parseInt(arguments[4]);
@@ -93,14 +92,14 @@ public class CreateShape implements Command {
                             shape.setFill(fill);
                             break;
                         default:
-                            System.out.println("Invalid number of arguments for circle.");
+                            System.out.println("Invalid number of arguments for rectangle.");
                             return;
                     }
                 } catch (NumberFormatException | NegativeValueException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
-            case "polygon":
+            case POLYGON:
                 shape = new Polygon();
                 for (int i = 2; i < arguments.length; i++) {
                     String[] points = arguments[i].split(",");
@@ -109,11 +108,14 @@ public class CreateShape implements Command {
                 }
                 break;
             default:
-                //...
+                System.out.println("Invalid shape or arguments");
                 break;
         }
-        SVGCanvas.getInstance().addShape(shape);
-        System.out.println(shape);
-        //System.out.println("Successfully created" + shapeName + "index");
+        if(shape!= null) {
+            SVGCanvas.getInstance().addShape(shape);
+            int index = SVGCanvas.getInstance().getShapes().indexOf(shape) + 1;
+            //System.out.println(shape);
+            System.out.println("Successfully created " + shapeType + " (" + index+ ")");
+        }
     }
 }

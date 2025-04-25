@@ -41,9 +41,9 @@ public class Circle extends SVGShape {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Circle ");
-        sb.append("radius= ").append(radius);
-        sb.append(", centrePoint= ").append(centrePoint);
+        StringBuilder sb = new StringBuilder("Circle\t\t");
+        sb.append("radius: ").append(radius);
+        sb.append(", centrePoint: ").append(centrePoint);
         sb.append(super.toString());
         return sb.toString();
     }
