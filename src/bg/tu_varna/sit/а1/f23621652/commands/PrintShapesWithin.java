@@ -16,19 +16,9 @@ public class PrintShapesWithin implements Command {
         List<Point> pointsToCheck = new ArrayList<>();
 
         for (SVGShape shape: SVGCanvas.getInstance().getShapes()) {
-            if (shape instanceof Line) {
-                pointsToCheck.add(((Line) shape).getStartPoint());
-                pointsToCheck.add(((Line) shape).getEndPoint());
-            }
-            else if (shape instanceof Circle) {
+            pointsToCheck.addAll(shape.getPoints());
 
-            }
-            else if (shape instanceof Rectangle) {
-                pointsToCheck.addAll(((Rectangle) shape).getPoints());
-            }
-            else if (shape instanceof Polygon) {
-                pointsToCheck.addAll(((Polygon) shape).getPoints());
-            }
+            boolean isWithin = false;
 
             if (shapeWithin == ShapeType.RECTANGLE) {
                 int width = Integer.parseInt(arguments[2]);
@@ -37,7 +27,12 @@ public class PrintShapesWithin implements Command {
                 int y1 = Integer.parseInt(arguments[5]);
                 try{
                     Rectangle rect = new Rectangle(width, height, new Point(x1, y1));
-                    checkPointsWithinRectangle(pointsToCheck, rect);
+                    if(shape instanceof Circle) {
+                        isWithin = checkPointsWithinRectangle(pointsToCheck, rect, ((Circle) shape).getRadius());
+                    }
+                    else{
+                        isWithin = checkPointsWithinRectangle(pointsToCheck, rect, 0);
+                    }
                 } catch (NumberFormatException | NegativeValueException e) {
                     System.out.println(e.getMessage());
                 }
@@ -48,31 +43,45 @@ public class PrintShapesWithin implements Command {
                 int cy = Integer.parseInt(arguments[4]);
                 try{
                     Circle circle = new Circle(r, new Point(cx, cy));
-                    checkPointsWithinCircle(pointsToCheck, circle);
+                    if(shape instanceof Circle){
+                        isWithin = checkPointsWithinCircle(pointsToCheck, circle, ((Circle) shape).getRadius());
+                    }
+                    else {
+                        isWithin = checkPointsWithinCircle(pointsToCheck, circle, 0);
+                    }
+
                 } catch (NumberFormatException | NegativeValueException e) {
                     System.out.println(e.getMessage());
                 }
             }
+
+            if(isWithin){
+                System.out.println(shape);
+            }
         }
     }
 
-    private boolean checkPointsWithinRectangle(List<Point> points, Rectangle rect){
-        for (Point point : points) {
-            if(true){
-
+    private boolean checkPointsWithinRectangle(List<Point> points, Rectangle rect, int radius){
+        Point rectPoint = rect.getTopLeftPoint();
+        for (Point circlePoint : points) {
+            if(circlePoint.getX() - radius < rectPoint.getX() || circlePoint.getX() + radius > rectPoint.getX() + rect.getWidth() ||
+                    circlePoint.getY() + radius > rectPoint.getY() || circlePoint.getY() - radius < rectPoint.getY() - rect.getHeight()){
+                return false;
             }
         }
-
         return true;
     }
 
-    private boolean checkPointsWithinCircle(List<Point> points, Circle circle){
-        //double distanceSquared = Math.pow(xPoint - xCenter, 2) + Math.pow(yPoint - yCenter, 2);
+    private boolean checkPointsWithinCircle(List<Point> points, Circle circle, int radius){
+        double distance;
+        Point circlePoint = circle.getCentrePoint();
 
-        for (Point point : points) {
-
+        for (Point shapePoint : points) {
+            distance = Math.sqrt(Math.pow(shapePoint.getX() - circlePoint.getX(), 2) + Math.pow(shapePoint.getY() - circlePoint.getY(), 2));
+            if(distance + radius > circle.getRadius()){
+                return false;
+            }
         }
-        //return distanceSquared <= Math.pow(radius, 2);
         return true;
     }
 }

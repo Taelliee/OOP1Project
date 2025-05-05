@@ -69,17 +69,6 @@ public class Rectangle extends SVGShape { // <rect>
         }
     }
 
-    public List<Point> getPoints(){
-        List<Point> points = new ArrayList<Point>();
-        points.add(topLeftPoint);
-        points.add(new Point(topLeftPoint.getX()+width, topLeftPoint.getY()));
-        points.add(new Point(topLeftPoint.getX()+width, topLeftPoint.getY()-height));
-        points.add(new Point(topLeftPoint.getX(), topLeftPoint.getY()-height));
-        return points;
-    }
-
-    //ToString()..
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Rectangle\t");
@@ -89,5 +78,15 @@ public class Rectangle extends SVGShape { // <rect>
         sb.append(", cornerRadius: ").append(cornerRadius);
         sb.append(super.toString());
         return sb.toString();
+    }
+
+    @Override
+    public List<Point> getPoints(){
+        List<Point> points = new ArrayList<>();
+        points.add(topLeftPoint);
+        points.add(new Point(topLeftPoint.getX()+width, topLeftPoint.getY()));
+        points.add(new Point(topLeftPoint.getX()+width, topLeftPoint.getY()-height));
+        points.add(new Point(topLeftPoint.getX(), topLeftPoint.getY()-height));
+        return points;
     }
 }

@@ -13,14 +13,15 @@ public class Polygon extends SVGShape { // <polygon>
         points.add(point);
     }
 
-    public List<Point> getPoints(){
-        return this.points;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Polygon\t\t");
         sb.append("points: ").append(points);
         return sb.toString();
+    }
+
+    @Override
+    public List<Point> getPoints(){
+        return this.points;
     }
 }

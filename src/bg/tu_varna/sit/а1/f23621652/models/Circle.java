@@ -3,6 +3,9 @@ package bg.tu_varna.sit.а1.f23621652.models;
 import bg.tu_varna.sit.а1.f23621652.exceptions.NegativeValueChecker;
 import bg.tu_varna.sit.а1.f23621652.exceptions.NegativeValueException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Circle extends SVGShape {
     private int radius;
     private Point centrePoint;
@@ -45,5 +48,12 @@ public class Circle extends SVGShape {
         sb.append(", centrePoint: ").append(centrePoint);
         sb.append(super.toString());
         return sb.toString();
+    }
+
+    @Override
+    public List<Point> getPoints() {
+        List<Point> points = new ArrayList<>();
+        points.add(centrePoint);
+        return points;
     }
 }
