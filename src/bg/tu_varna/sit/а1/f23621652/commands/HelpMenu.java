@@ -12,7 +12,11 @@ public class HelpMenu implements Command {
             .append("help                       prints this information\n")
             .append("exit                       exits the program\n")
             .append("print                      prints all shapes\n")
-            .append("create <type> <attributes> creates a new shape\n")
+            .append("create <t> <attributes>    creates a new shape\n")
+            .append("   -> rectangle width height topLeftX topLeftY [cornerRadiusX cornerRadiusY] [fill]\n")
+            .append("   -> circle radius [centerX centerY] [fill]\n")
+            .append("   -> line startPointX startPointY endPointX endPointY [stroke]\n")
+            .append("   -> polygon polygon x1 y1 x2 y2 x3 y3 [fill]\n")
             .append("erase <n>                  erase a shape with index n\n")
             .append("translate <x> <y> [<n>]    translates a shape/shapes horizontally and vertically\n")
             .append("within <option>            prints all shapes within a circle or rectangle\n");

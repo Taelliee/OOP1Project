@@ -18,7 +18,7 @@ public class CreateShape implements Command {
         //2. create circle 10 5 5 blue
         //3. create rectangle 10 10 100 -60
         //4. create line 0 0 300 200
-        //5. create polygon 100,10 150,190 50,190
+        //5. create polygon 100 10 150 190 50 190 yellow
 
         // > create rectangle 10 20 -1000 -1000 yellow
         // Successfully created rectangle (index)
@@ -29,6 +29,9 @@ public class CreateShape implements Command {
                 x2 = Integer.parseInt(arguments[4]);
                 y2 = Integer.parseInt(arguments[5]);
                 shape = new Line(new Point(x1, y1), new Point(x2, y2));
+                if(arguments.length == 7){
+                    shape.setStroke(arguments[6]);
+                }
                 break;
             case CIRCLE:
                 r = Integer.parseInt(arguments[2]);
@@ -100,8 +103,13 @@ public class CreateShape implements Command {
                 break;
             case POLYGON:
                 shape = new Polygon();
-                for (int i = 2; i < arguments.length; i++) {
-                    String[] points = arguments[i].split(",");
+                int numPoints = arguments.length;
+                if(arguments.length % 2 != 0){
+                    numPoints--;
+                    shape.setFill(arguments[arguments.length - 1]);
+                }
+                for (int i = 2; i < numPoints; i += 2) {
+                    String[] points = {arguments[i], arguments[i+1]};
                     Point point = new Point(Integer.parseInt(points[0]), Integer.parseInt(points[1]));
                     ((Polygon) shape).addPoint(point);
                 }
