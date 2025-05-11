@@ -30,7 +30,7 @@ public class Line extends SVGShape {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Line\t\t\t");
+        StringBuilder sb = new StringBuilder("Line\t\t");
         sb.append("startPoint: ").append(startPoint);
         sb.append(", endPoint: ").append(endPoint);
         sb.append(super.toString());

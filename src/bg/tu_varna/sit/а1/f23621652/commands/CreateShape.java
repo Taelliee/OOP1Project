@@ -9,6 +9,10 @@ import bg.tu_varna.sit.а1.f23621652.models.*;
 public class CreateShape implements Command {
     @Override
     public void execute(String[] arguments) {
+        if(arguments.length < 2 || ShapeType.convertFromText(arguments[1]) == null){
+            System.out.println("Please choose a valid shape and write its attributes. (rectangle, circle, line, polygon)");
+            return;
+        }
         ShapeType shapeType = ShapeType.convertFromText(arguments[1]);
         int x1, x2, y1, y2, cx, cy, r, width, height;
         String fill;
@@ -24,16 +28,25 @@ public class CreateShape implements Command {
         // Successfully created rectangle (index)
         switch (shapeType){
             case LINE:
-                x1 = Integer.parseInt(arguments[2]);
-                y1 = Integer.parseInt(arguments[3]);
-                x2 = Integer.parseInt(arguments[4]);
-                y2 = Integer.parseInt(arguments[5]);
-                shape = new Line(new Point(x1, y1), new Point(x2, y2));
-                if(arguments.length == 7){
-                    shape.setStroke(arguments[6]);
+                if(arguments.length == 6 || arguments.length == 7){
+                    x1 = Integer.parseInt(arguments[2]);
+                    y1 = Integer.parseInt(arguments[3]);
+                    x2 = Integer.parseInt(arguments[4]);
+                    y2 = Integer.parseInt(arguments[5]);
+                    shape = new Line(new Point(x1, y1), new Point(x2, y2));
+                    if(arguments.length == 7){
+                        shape.setStroke(arguments[6]);
+                    }
+                }
+                else{
+                    System.out.println("Invalid number of arguments for line. (x1 y1 x2 y2 [stroke])");
                 }
                 break;
             case CIRCLE:
+                if(arguments.length < 3){
+                    System.out.println("You haven's chosen a radius for the circle!");
+                    return;
+                }
                 r = Integer.parseInt(arguments[2]);
                 try {
                     switch (arguments.length) {
@@ -66,6 +79,10 @@ public class CreateShape implements Command {
                 }
                 break;
             case RECTANGLE:
+                if(arguments.length < 6){
+                    System.out.println("You haven't put the required rectangle arguments! (width height x y)");
+                    return;
+                }
                 width = Integer.parseInt(arguments[2]);
                 height = Integer.parseInt(arguments[3]);
                 x1 = Integer.parseInt(arguments[4]);

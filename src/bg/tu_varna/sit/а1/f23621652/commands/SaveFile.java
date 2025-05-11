@@ -11,18 +11,23 @@ import java.io.IOException;
 public class SaveFile implements Command {
     @Override
     public void execute(String[] arguments) {
-        try {
-            FileWriter fileWriter = new FileWriter(ShapesFile.getFile());
-            StringBuilder textToWrite = new StringBuilder();
-            for (SVGShape shape : SVGCanvas.getInstance().getShapes()) {
-                textToWrite.append("");
-            }
+        if(OpenFile.isOpened()) {
+            try {
+                FileWriter fileWriter = new FileWriter(ShapesFile.getFile());
+                StringBuilder textToWrite = new StringBuilder();
+                for (SVGShape shape : SVGCanvas.getInstance().getShapes()) {
+                    textToWrite.append("");
+                }
 
-            fileWriter.write(textToWrite.toString());
-            System.out.println("Successfully saved changes to " + ShapesFile.getFile().getName());
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+                fileWriter.write(textToWrite.toString());
+                System.out.println("Successfully saved changes to " + ShapesFile.getFile().getName());
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            System.out.println("File not opened! Cannot execute command.");
         }
     }
 }

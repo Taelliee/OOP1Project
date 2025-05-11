@@ -26,11 +26,10 @@ public class CommandManager {
     public static void chooseCommand(){
         System.out.print("Write your command: \n> ");
         Scanner input = new Scanner(System.in);
-        String[] inputTokens = input.nextLine().split(" ");
+        String[] inputTokens = input.nextLine().trim().split("\\s+"); //\s is whitespace character - space, tab, new line
 
         CommandType commandType = CommandType.convertFromText(inputTokens[0]);
         Command command = commands.get(commandType);
-        //String argument = inputTokens.length > 1 ? inputTokens[1] : "";
 
         if (command != null) {
             command.execute(inputTokens);

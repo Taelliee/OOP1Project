@@ -75,7 +75,9 @@ public class Rectangle extends SVGShape { // <rect>
         sb.append("width: ").append(width);
         sb.append(", height: ").append(height);
         sb.append(", topLeftPoint: ").append(topLeftPoint);
-        sb.append(", cornerRadius: ").append(cornerRadius);
+        if(this.cornerRadius.getX() != 0 && this.cornerRadius.getY() != 0){
+            sb.append(", cornerRadius: ").append(cornerRadius);
+        }
         sb.append(super.toString());
         return sb.toString();
     }

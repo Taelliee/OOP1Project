@@ -30,4 +30,8 @@ public class SVGCanvas {
     public List<SVGShape> getShapes() {
         return shapes;
     }
+
+    public void clearShapes(){
+        this.shapes.clear();
+    }
 }
