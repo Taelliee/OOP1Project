@@ -1,7 +1,9 @@
-package bg.tu_varna.sit.а1.f23621652.models;
+package bg.tu_varna.sit.а1.f23621652.parsers;
 
 import bg.tu_varna.sit.а1.f23621652.SVGCanvas;
 import bg.tu_varna.sit.а1.f23621652.exceptions.NegativeValueException;
+import bg.tu_varna.sit.а1.f23621652.files.ShapesFile;
+import bg.tu_varna.sit.а1.f23621652.models.*;
 
 import java.io.*;
 import java.util.*;

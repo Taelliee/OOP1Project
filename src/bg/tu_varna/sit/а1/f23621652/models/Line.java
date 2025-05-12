@@ -38,6 +38,18 @@ public class Line extends SVGShape {
     }
 
     @Override
+    public String toSVGFormat() { //<line x1="0" y1="0" x2="300" y2="200" stroke="pink" />
+        StringBuilder sb = new StringBuilder("<line");
+        sb.append(" x1=\"").append(startPoint.getX());
+        sb.append(" y1=\"").append(startPoint.getY());
+        sb.append(" x2=\"").append(endPoint.getX());
+        sb.append(" y2=\"").append(endPoint.getY());
+        sb.append(super.toSVGFormat());
+        sb.append(" />");
+        return sb.toString();
+    }
+
+    @Override
     public List<Point> getPoints() {
         List<Point> points = new ArrayList<>();
         points.add(startPoint);

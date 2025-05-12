@@ -51,6 +51,18 @@ public class Circle extends SVGShape {
     }
 
     @Override
+    public String toSVGFormat() { //<circle r="10" cx="5" cy="5" fill="blue" />
+        StringBuilder sb = new StringBuilder("<circle");
+        sb.append(" r=\"").append(radius).append("\"");
+        sb.append(" cx=\"").append(centrePoint.getX()).append("\"");
+        sb.append(" cy=\"").append(centrePoint.getX()).append("\"");
+        sb.append(super.toSVGFormat());
+        sb.append(" />");
+
+        return sb.toString();
+    }
+
+    @Override
     public List<Point> getPoints() {
         List<Point> points = new ArrayList<>();
         points.add(centrePoint);

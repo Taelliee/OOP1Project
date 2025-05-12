@@ -2,7 +2,7 @@ package bg.tu_varna.sit.а1.f23621652.commands;
 
 import bg.tu_varna.sit.а1.f23621652.SVGCanvas;
 import bg.tu_varna.sit.а1.f23621652.interfaces.Command;
-import bg.tu_varna.sit.а1.f23621652.models.ShapesFile;
+import bg.tu_varna.sit.а1.f23621652.files.ShapesFile;
 
 public class CloseFile implements Command {
     //След затваряне не може да изпълнява други команди, освен отваряне на файл!

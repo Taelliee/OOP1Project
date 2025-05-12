@@ -1,8 +1,9 @@
 package bg.tu_varna.sit.а1.f23621652.models;
 
 import bg.tu_varna.sit.а1.f23621652.interfaces.Pointer;
+import bg.tu_varna.sit.а1.f23621652.interfaces.SVGFormatter;
 
-public abstract class SVGShape implements Pointer {
+public abstract class SVGShape implements Pointer, SVGFormatter {
     private String fill = "black";
     private String stroke = "black";
 
@@ -30,6 +31,18 @@ public abstract class SVGShape implements Pointer {
         }
         if(!this.stroke.equals("black")){
             sb.append(", stroke=").append(stroke);
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public String toSVGFormat() {
+        StringBuilder sb = new StringBuilder();
+        if(!this.fill.equals("black")){
+            sb.append(" fill=\"").append(fill).append("\"");
+        }
+        if(!this.stroke.equals("black")){
+            sb.append(" stroke=\"").append(stroke).append("\"");
         }
         return sb.toString();
     }

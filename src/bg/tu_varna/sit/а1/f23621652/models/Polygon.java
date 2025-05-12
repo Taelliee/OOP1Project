@@ -22,6 +22,23 @@ public class Polygon extends SVGShape { // <polygon>
     }
 
     @Override
+    public String toSVGFormat() { //<polygon points="100,10 150,190 50,190" fill="purple" />
+        final StringBuilder sb = new StringBuilder("<polygon");
+        sb.append(" points=\"");
+        for (int i = 0; i < points.size(); i++) {
+            Point p = points.get(i);
+            sb.append(p.getX()).append(",").append(p.getY());
+            if (i < points.size() - 1) {
+                sb.append(" ");
+            }
+        }
+        sb.append("\"");
+        sb.append(super.toSVGFormat());
+        sb.append(" />");
+        return sb.toString();
+    }
+
+    @Override
     public List<Point> getPoints(){
         return this.points;
     }

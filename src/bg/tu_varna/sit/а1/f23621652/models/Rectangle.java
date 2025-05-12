@@ -83,6 +83,25 @@ public class Rectangle extends SVGShape { // <rect>
     }
 
     @Override
+    public String toSVGFormat() { // <rect width="10" height="10" x="5" y="5" rx="10" ry="10 fill="green" />
+        StringBuilder sb = new StringBuilder("<rect");
+
+        sb.append(" width=\"").append(width).append("\"");
+        sb.append(" height=\"").append(height).append("\"");
+        sb.append(" x=\"").append(topLeftPoint.getX()).append("\"");
+        sb.append(" y=\"").append(topLeftPoint.getY()).append("\"");
+
+        if (cornerRadius.getX() != 0 || cornerRadius.getY() != 0) {
+            sb.append(" rx=\"").append(cornerRadius.getX()).append("\"");
+            sb.append(" ry=\"").append(cornerRadius.getY()).append("\"");
+        }
+
+        sb.append(super.toSVGFormat());
+        sb.append(" />");
+        return sb.toString();
+    }
+
+    @Override
     public List<Point> getPoints(){
         List<Point> points = new ArrayList<>();
         points.add(topLeftPoint);
