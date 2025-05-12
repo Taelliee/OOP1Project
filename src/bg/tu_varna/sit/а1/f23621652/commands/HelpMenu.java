@@ -17,7 +17,7 @@ public class HelpMenu implements Command {
             .append("   -> circle radius [centerX centerY] [fill]\n")
             .append("   -> line startPointX startPointY endPointX endPointY [stroke]\n")
             .append("   -> polygon polygon x1 y1 x2 y2 x3 y3 [fill]\n")
-            .append("erase <n>                  erase a shape with index n\n")
+            .append("erase <n>                  erases a shape with index n\n")
             .append("translate <x> <y> [<n>]    translates a shape/shapes horizontally and vertically\n")
             .append("within <option>            prints all shapes within a circle or rectangle\n");
     @Override
