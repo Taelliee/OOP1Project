@@ -6,7 +6,6 @@ public class ExitProgram implements Command {
     @Override
     public void execute(String[] arguments) {
         System.out.println("Exiting the program...");
-        //close files, save data
         System.exit(0);
     }
 }

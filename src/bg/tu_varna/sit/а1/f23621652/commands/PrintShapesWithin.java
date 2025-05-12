@@ -12,15 +12,26 @@ import java.util.List;
 public class PrintShapesWithin implements Command {
     @Override
     public void execute(String[] arguments) {
+        if(arguments.length < 3 || ShapeType.convertFromText(arguments[1]) == null){
+            System.out.println("Please choose a valid shape and write its attributes. (rectangle, circle, line, polygon)");
+            return;
+        }
         ShapeType shapeWithin = ShapeType.convertFromText(arguments[1]);
         List<Point> pointsToCheck = new ArrayList<>();
 
+        boolean isAnythingWithin = false;
+
         for (SVGShape shape: SVGCanvas.getInstance().getShapes()) {
+            pointsToCheck.clear();
             pointsToCheck.addAll(shape.getPoints());
 
             boolean isWithin = false;
 
             if (shapeWithin == ShapeType.RECTANGLE) {
+                if(arguments.length != 6){
+                    System.out.println("Please write the width, height and top left point! (width height x y)");
+                    return;
+                }
                 int width = Integer.parseInt(arguments[2]);
                 int height = Integer.parseInt(arguments[3]);
                 int x1 = Integer.parseInt(arguments[4]);
@@ -38,6 +49,10 @@ public class PrintShapesWithin implements Command {
                 }
             }
             else if(shapeWithin == ShapeType.CIRCLE){
+                if(arguments.length != 5){
+                    System.out.println("Please write the radius and center point! (circle r cx cy)");
+                    return;
+                }
                 int r = Integer.parseInt(arguments[2]);
                 int cx = Integer.parseInt(arguments[3]);
                 int cy = Integer.parseInt(arguments[4]);
@@ -57,10 +72,21 @@ public class PrintShapesWithin implements Command {
 
             if(isWithin){
                 System.out.println(shape);
+                isAnythingWithin = true;
             }
+        }
+        if(!isAnythingWithin){
+            System.out.println("No shapes within!");
         }
     }
 
+    /**
+     *
+     * @param points
+     * @param rect
+     * @param radius
+     * @return
+     */
     private boolean checkPointsWithinRectangle(List<Point> points, Rectangle rect, int radius){
         Point rectPoint = rect.getTopLeftPoint();
         for (Point circlePoint : points) {
@@ -72,6 +98,13 @@ public class PrintShapesWithin implements Command {
         return true;
     }
 
+    /**
+     *
+     * @param points
+     * @param circle
+     * @param radius
+     * @return
+     */
     private boolean checkPointsWithinCircle(List<Point> points, Circle circle, int radius){
         double distance;
         Point circlePoint = circle.getCentrePoint();

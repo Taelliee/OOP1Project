@@ -28,8 +28,8 @@ public class OpenFile implements Command {
         try {
             ShapesFile.setFile(new File(arguments[1]));
             if(ShapesFile.getFile().exists()){
-                System.out.println("Successfully opened " + ShapesFile.getFile().getName());
                 SVGParser.parseShapes();
+                System.out.println("Successfully opened " + ShapesFile.getFile().getName());
                 isOpened = true;
             }
             else {

@@ -4,5 +4,5 @@
 <svg>
  <rect width="10" height="10" x="5" y="5" fill="green" />
  <circle r="10" cx="5" cy="5" fill="blue" />
- <line x1="0 y1="0 x2="300 y2="200 stroke="pink" />
+ <line x1="0" y1="0" x2="300" y2="200" stroke="pink" />
 </svg>

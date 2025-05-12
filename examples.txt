@@ -1,0 +1,15 @@
+CREATE:
+create rectangle 5 5 -10 10 green
+create circle 10 5 5 blue
+create rectangle 10 10 100 -60 5 5 pink
+create line 0 0 300 200 red
+create polygon 100 10 150 190 50 190 yellow
+
+TRANSLATE:
+translate 5 5
+translate 10 10 2
+
+PRINT WITHIN:
+within rectangle 15 15 -10 10
+within circle 15 5 5
+
