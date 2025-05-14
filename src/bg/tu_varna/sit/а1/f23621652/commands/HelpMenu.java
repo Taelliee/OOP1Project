@@ -2,6 +2,9 @@ package bg.tu_varna.sit.а1.f23621652.commands;
 
 import bg.tu_varna.sit.а1.f23621652.interfaces.Command;
 
+/**
+ * Command implementation for displaying the list of supported commands and their usage.
+ */
 public class HelpMenu implements Command {
     private static final StringBuilder mainMenu = new StringBuilder()
             .append("The following commands are supported:\n")
@@ -20,6 +23,13 @@ public class HelpMenu implements Command {
             .append("erase <n>                  erases a shape with index n\n")
             .append("translate <x> <y> [<n>]    translates a shape/shapes horizontally and vertically\n")
             .append("within <option>            prints all shapes within a circle or rectangle\n");
+
+    /**
+     * Executes the help command.
+     * Prints all available commands and their usage to the console.
+     *
+     * @param arguments Not used in this command.
+     */
     @Override
     public void execute(String[] arguments) {
         System.out.println(mainMenu);

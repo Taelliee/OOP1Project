@@ -7,18 +7,37 @@ import bg.tu_varna.sit.а1.f23621652.files.ShapesFile;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Command implementation for opening an existing SVG file or creating a new one.
+ * All other commands require a file to be opened first.
+ */
 public class OpenFile implements Command {
-    //Всички останали команди могат да се изпълняват само ако има успешно зареден файл!
     private static boolean isOpened = false;
 
+    /**
+     * Returns whether a file is currently opened.
+     *
+     * @return true if a file is opened, false otherwise.
+     */
     public static boolean isOpened() {
         return isOpened;
     }
 
+    /**
+     * Sets the open state of the file.
+     *
+     * @param isOpened The new open state.
+     */
     public static void setIsOpened(boolean isOpened) {
         OpenFile.isOpened = isOpened;
     }
 
+    /**
+     * Executes the open file command.
+     * Tries to open or create a file and parses its contents.
+     *
+     * @param arguments The second argument should be the file path.
+     */
     @Override
     public void execute(String[] arguments) {
         if(arguments.length != 2){

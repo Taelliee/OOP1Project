@@ -6,7 +6,17 @@ import bg.tu_varna.sit.а1.f23621652.files.ShapesFile;
 
 import java.io.IOException;
 
+/**
+ * Command implementation for saving changes to the currently opened SVG file.
+ */
 public class SaveFile implements Command {
+
+    /**
+     * Executes the save command.
+     * Writes the current SVG canvas to the file opened by the user.
+     *
+     * @param arguments Not used in this command.
+     */
     @Override
     public void execute(String[] arguments) {
         if(OpenFile.isOpened()) {

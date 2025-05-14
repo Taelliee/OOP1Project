@@ -6,7 +6,17 @@ import bg.tu_varna.sit.а1.f23621652.interfaces.Command;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Command implementation for saving the current canvas to a new file.
+ */
 public class SaveAsAnotherFile implements Command {
+
+    /**
+     * Executes the save-as command.
+     * Saves the SVG shapes to a file specified in the argument.
+     *
+     * @param arguments The second argument should be the new file path.
+     */
     @Override
     public void execute(String[] arguments) {
         if(OpenFile.isOpened()){

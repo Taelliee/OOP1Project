@@ -5,7 +5,17 @@ import bg.tu_varna.sit.а1.f23621652.models.*;
 
 import java.io.*;
 
+/**
+ * Utility class responsible for writing SVG shapes to a file in valid SVG format.
+ */
 public class SVGFileWriter {
+    /**
+     * Writes the current SVG shapes from the canvas to the specified file.
+     * The output is formatted as a valid SVG document.
+     *
+     * @param file the file to which the shapes should be saved.
+     * @throws IOException if an I/O error occurs during writing.
+     */
     public static void saveToFile(File file) throws IOException {
         FileWriter fileWriter = new FileWriter(file);
         StringBuilder textToWrite = new StringBuilder();

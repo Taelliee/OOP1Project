@@ -6,6 +6,11 @@ import bg.tu_varna.sit.а1.f23621652.interfaces.Command;
 
 import java.util.*;
 
+/**
+ * Manages the execution of commands in the SVG shapes application.
+ * Implements the Command pattern to handle various user commands.
+ * Maintains a mapping of command types to their respective command objects.
+ */
 public class CommandManager {
     private static final Map<CommandType, Command> commands = new HashMap<>(); //belongs to the class (not instances); can't be reassigned
 
@@ -23,6 +28,10 @@ public class CommandManager {
         commands.put(CommandType.WITHIN, new PrintShapesWithin()); //<option>
     }
 
+    /**
+     * Prompts the user for a command, parses the input, and executes the corresponding command.
+     * Displays an error message if the command is not recognized.
+     */
     public static void chooseCommand(){
         System.out.print("Write your command: \n> ");
         Scanner input = new Scanner(System.in);

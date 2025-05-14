@@ -1,5 +1,9 @@
 package bg.tu_varna.sit.а1.f23621652.models;
 
+/**
+ * Represents a point in the Coordinate system with x and y coordinates.
+ * Used to define positions of shapes in the SVG canvas.
+ */
 public class Point {
     private int x;
     private int y;

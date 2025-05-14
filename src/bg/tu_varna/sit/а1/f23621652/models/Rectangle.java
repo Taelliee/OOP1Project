@@ -6,13 +6,21 @@ import bg.tu_varna.sit.а1.f23621652.exceptions.NegativeValueException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a rectangle shape in SVG format.
+ * Extends SVGShape and implements methods for rectangle-specific properties and SVG formatting.
+ */
 public class Rectangle extends SVGShape { // <rect>
     private int width;
     private int height;
     private Point topLeftPoint;
     private Point cornerRadius;
-    // private String fill = "black";
 
+    /**
+     * Constructs a Rectangle with specified width, height, and top-left point.
+     * Corner radius is set at (0,0).
+     * @throws NegativeValueException if width or height is negative
+     */
     public Rectangle(int width, int height, Point topLeftPoint) throws NegativeValueException {
         this.topLeftPoint = topLeftPoint;
         this.cornerRadius = new Point(0,0);
@@ -20,7 +28,11 @@ public class Rectangle extends SVGShape { // <rect>
         setHeight(height);
     }
 
-    public Rectangle(int width, int height, Point topLeftPoint, Point cornerRadius) throws NegativeValueException {
+    /**
+     * Constructs a Rectangle with specified width, height, top-left point, and corner radius.
+     * @throws NegativeValueException if width or height is negative
+     */
+     public Rectangle(int width, int height, Point topLeftPoint, Point cornerRadius) throws NegativeValueException {
         this.topLeftPoint = topLeftPoint;
         this.cornerRadius = cornerRadius;
         setWidth(width);
@@ -47,6 +59,12 @@ public class Rectangle extends SVGShape { // <rect>
         return width;
     }
 
+    /**
+     * Sets the width of the rectangle.
+     *
+     * @param width The new width
+     * @throws NegativeValueException if width is negative
+     */
     public void setWidth(int width) throws NegativeValueException {
         if(NegativeValueChecker.isValueNegative(width)) {
          throw new NegativeValueException(NegativeValueChecker.message);
@@ -60,6 +78,12 @@ public class Rectangle extends SVGShape { // <rect>
         return height;
     }
 
+    /**
+     * Sets the height of the rectangle.
+     *
+     * @param height The new height
+     * @throws NegativeValueException if height is negative
+     */
     public void setHeight(int height) throws NegativeValueException {
         if(NegativeValueChecker.isValueNegative(height)) {
             throw new NegativeValueException(NegativeValueChecker.message);
@@ -82,6 +106,11 @@ public class Rectangle extends SVGShape { // <rect>
         return sb.toString();
     }
 
+    /**
+     * Converts the rectangle to SVG format string.
+     *
+     * @return SVG-formatted string representing the rectangle
+     */
     @Override
     public String toSVGFormat() { // <rect width="10" height="10" x="5" y="5" rx="10" ry="10 fill="green" />
         StringBuilder sb = new StringBuilder("<rect");
@@ -101,6 +130,11 @@ public class Rectangle extends SVGShape { // <rect>
         return sb.toString();
     }
 
+    /**
+     * Gets all four corner points that define the rectangle.
+     *
+     * @return List of points defining the rectangle's corners
+     */
     @Override
     public List<Point> getPoints(){
         List<Point> points = new ArrayList<>();

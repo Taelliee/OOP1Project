@@ -3,8 +3,17 @@ package bg.tu_varna.sit.а1.f23621652.commands;
 import bg.tu_varna.sit.а1.f23621652.SVGCanvas;
 import bg.tu_varna.sit.а1.f23621652.interfaces.Command;
 import bg.tu_varna.sit.а1.f23621652.models.*;
-
+/**
+ * Command implementation for translating a specific shape or all shapes on the canvas.
+ */
 public class TranslateShape implements Command {
+
+    /**
+     * Executes the translate command.
+     * Moves shapes by a specified x and y offset.
+     *
+     * @param arguments Arguments include x and y offset, and optionally an index for a specific shape.
+     */
     @Override
     public void execute(String[] arguments) {
         //> translate 5 5
@@ -29,6 +38,13 @@ public class TranslateShape implements Command {
         }
     }
 
+    /**
+     * Applies the translation to the specific shape instance.
+     *
+     * @param shape The shape to translate.
+     * @param transX Horizontal offset.
+     * @param transY Vertical offset.
+     */
     private void findInstanceAndTranslate(SVGShape shape, int transX, int transY){
         if(shape instanceof Line){
             Point newStartPoint = new Point((((Line) shape).getStartPoint().getX() + transX), ((Line) shape).getStartPoint().getY() + transY);

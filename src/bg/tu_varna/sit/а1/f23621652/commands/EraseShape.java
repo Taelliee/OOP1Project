@@ -6,7 +6,17 @@ import bg.tu_varna.sit.а1.f23621652.models.SVGShape;
 
 import java.util.List;
 
+/**
+ * Command implementation for erasing a shape from the SVG canvas by index.
+ */
 public class EraseShape implements Command {
+
+    /**
+     * Executes the erase shape operation.
+     * Removes the shape at the specified index from the canvas.
+     *
+     * @param arguments Array where the second element (index 1) is the index of the shape to erase.
+     */
     @Override
     public void execute(String[] arguments) {
         int index = Integer.parseInt(arguments[1]);

@@ -4,9 +4,17 @@ import bg.tu_varna.sit.а1.f23621652.SVGCanvas;
 import bg.tu_varna.sit.а1.f23621652.interfaces.Command;
 import bg.tu_varna.sit.а1.f23621652.files.ShapesFile;
 
+/**
+ * Command implementation that closes the currently opened SVG file.
+ * After closing, no further commands can be executed except opening a file again.
+ */
 public class CloseFile implements Command {
-    //След затваряне не може да изпълнява други команди, освен отваряне на файл!
-
+    /**
+     * Executes the close file operation.
+     * Clears all shapes from the canvas and marks the file as closed.
+     *
+     * @param arguments Not used in this command.
+     */
     @Override
     public void execute(String[] arguments) {
         if(OpenFile.isOpened()){

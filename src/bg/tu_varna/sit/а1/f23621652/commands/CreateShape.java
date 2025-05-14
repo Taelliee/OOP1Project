@@ -6,7 +6,22 @@ import bg.tu_varna.sit.а1.f23621652.exceptions.NegativeValueException;
 import bg.tu_varna.sit.а1.f23621652.interfaces.Command;
 import bg.tu_varna.sit.а1.f23621652.models.*;
 
+/**
+ * Command implementation for creating different types of SVG shapes.
+ * Supports rectangle, circle, line, and polygon.
+ */
 public class CreateShape implements Command {
+
+    /**
+     * Parses arguments and creates a shape accordingly, then adds it to the canvas.
+     *
+     * @param arguments Array of string arguments describing the shape and its properties.
+     *                  Expected formats vary by shape type:
+     *                  - rectangle width height x y [rx ry] [fill]
+     *                  - circle r [cx cy] [fill]
+     *                  - line x1 y1 x2 y2 [stroke]
+     *                  - polygon x1 y1 x2 y2 ... [fill]
+     */
     @Override
     public void execute(String[] arguments) {
         if(arguments.length < 2 || ShapeType.convertFromText(arguments[1]) == null){

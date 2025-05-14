@@ -9,7 +9,20 @@ import bg.tu_varna.sit.а1.f23621652.models.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Command implementation for printing all shapes in the canvas within a specified circle or rectangle.
+ */
 public class PrintShapesWithin implements Command {
+    /**
+     * Executes the "within" command.
+     * This command checks all shapes currently on the canvas and prints those that are entirely located
+     * within a specified boundary shape. The boundary can be either a rectangle or a circle, and its
+     * dimensions and position must be provided as arguments.
+     *
+     * @param arguments The arguments that specify the boundary shape type and its parameters.
+     *                  For a rectangle: width, height, x, y.
+     *                  For a circle: radius, cx, cy.
+     */
     @Override
     public void execute(String[] arguments) {
         if(arguments.length < 3 || ShapeType.convertFromText(arguments[1]) == null){
@@ -81,11 +94,12 @@ public class PrintShapesWithin implements Command {
     }
 
     /**
+     * Checks if the given points (optionally with radius) are entirely within a rectangle.
      *
-     * @param points
-     * @param rect
-     * @param radius
-     * @return
+     * @param points List of points to check.
+     * @param rect The rectangle boundary.
+     * @param radius Optional radius offset (used for circles).
+     * @return true if all points are within the rectangle, false otherwise.
      */
     private boolean checkPointsWithinRectangle(List<Point> points, Rectangle rect, int radius){
         Point rectPoint = rect.getTopLeftPoint();
@@ -99,11 +113,12 @@ public class PrintShapesWithin implements Command {
     }
 
     /**
+     * Checks if the given points (optionally with radius) are entirely within a circle.
      *
-     * @param points
-     * @param circle
-     * @param radius
-     * @return
+     * @param points List of points to check.
+     * @param circle The circle boundary.
+     * @param radius Optional radius offset (used for circles).
+     * @return true if all points are within the circle, false otherwise.
      */
     private boolean checkPointsWithinCircle(List<Point> points, Circle circle, int radius){
         double distance;

@@ -8,7 +8,17 @@ import bg.tu_varna.sit.а1.f23621652.models.*;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Utility class for parsing SVG shape definitions from a file and converting them
+ * into corresponding Java objects. Supports rectangles, circles, lines, and polygons.
+ */
 public class SVGParser {
+
+    /**
+     * Parses shapes from the shapes file and adds them to the SVGCanvas.
+     * Reads the file line by line and assigns parsing to specific shape parsers.
+     * Prints all parsed shapes to the console.
+     */
     public static void parseShapes() {
         try (BufferedReader br = new BufferedReader(new FileReader(ShapesFile.getFile()))) {
             List<SVGShape> shapes = SVGCanvas.getInstance().getShapes();
@@ -39,6 +49,12 @@ public class SVGParser {
         }
     }
 
+    /**
+     * Parses a rectangle definition from SVG format.
+     *
+     * @param line The SVG string containing rectangle attributes
+     * @return Rectangle object parsed from the string, or null if parsing fails
+     */
     private static Rectangle parseRect(String line) {
         int width = getIntAttr(line, "width");
         int height = getIntAttr(line, "height");
@@ -58,6 +74,12 @@ public class SVGParser {
         return null;
     }
 
+    /**
+     * Parses a circle definition from SVG format.
+     *
+     * @param line The SVG string containing circle attributes
+     * @return Circle object parsed from the string, or null if parsing fails
+     */
     private static Circle parseCircle(String line) {
         int r = getIntAttr(line, "r");
         int cx = getIntAttr(line, "cx");
@@ -75,6 +97,12 @@ public class SVGParser {
         return null;
     }
 
+    /**
+     * Parses a line definition from SVG format.
+     *
+     * @param line The SVG string containing line attributes
+     * @return Line object parsed from the string
+     */
     private static Line parseLine(String line) {
         int x1 = getIntAttr(line, "x1");
         int y1 = getIntAttr(line, "y1");
@@ -88,6 +116,12 @@ public class SVGParser {
         return l;
     }
 
+    /**
+     * Parses a polygon definition from SVG format.
+     *
+     * @param line The SVG string containing polygon attributes
+     * @return Polygon object parsed from the string
+     */
     private static Polygon parsePolygon(String line) {
         Polygon polygon = new Polygon();
 
@@ -111,11 +145,25 @@ public class SVGParser {
         return polygon;
     }
 
+    /**
+     * Extracts an integer attribute value from an SVG element string.
+     *
+     * @param line The SVG element string
+     * @param attr The attribute name to extract
+     * @return The integer value of the attribute, or 0 if not found
+     */
     private static int getIntAttr(String line, String attr) {
         String intValue = getAttr(line, attr);
         return intValue.isEmpty() ? 0 : Integer.parseInt(intValue);
     }
 
+    /**
+     * Extracts an attribute value from an SVG element string.
+     *
+     * @param line The SVG element string
+     * @param attr The attribute name to extract
+     * @return The string value of the attribute, or empty string if not found
+     */
     private static String getAttr(String line, String attr) {
         int start = line.indexOf(attr + "=\"");
         if (start == -1)

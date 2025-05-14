@@ -3,6 +3,10 @@ package bg.tu_varna.sit.а1.f23621652.models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a line shape in SVG format.
+ * Extends SVGShape and implements methods for line-specific properties and SVG formatting.
+ */
 public class Line extends SVGShape {
     private Point startPoint;
     private Point endPoint;
@@ -37,6 +41,11 @@ public class Line extends SVGShape {
         return sb.toString();
     }
 
+    /**
+     * Converts the line to SVG format string.
+     *
+     * @return SVG-formatted string representing the line
+     */
     @Override
     public String toSVGFormat() { //<line x1="0" y1="0" x2="300" y2="200" stroke="pink" />
         StringBuilder sb = new StringBuilder("<line");
@@ -49,6 +58,11 @@ public class Line extends SVGShape {
         return sb.toString();
     }
 
+    /**
+     * Gets all points that define the line (start and end points).
+     *
+     * @return List containing the start and end points
+     */
     @Override
     public List<Point> getPoints() {
         List<Point> points = new ArrayList<>();
