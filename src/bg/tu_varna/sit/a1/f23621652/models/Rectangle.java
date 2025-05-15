@@ -2,6 +2,7 @@ package bg.tu_varna.sit.a1.f23621652.models;
 
 import bg.tu_varna.sit.a1.f23621652.exceptions.NegativeValueChecker;
 import bg.tu_varna.sit.a1.f23621652.exceptions.NegativeValueException;
+import bg.tu_varna.sit.a1.f23621652.parsers.InputParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,17 +25,6 @@ public class Rectangle extends SVGShape { // <rect>
     public Rectangle(int width, int height, Point topLeftPoint) throws NegativeValueException {
         this.topLeftPoint = topLeftPoint;
         this.cornerRadius = new Point(0,0);
-        setWidth(width);
-        setHeight(height);
-    }
-
-    /**
-     * Constructs a Rectangle with specified width, height, top-left point, and corner radius.
-     * @throws NegativeValueException if width or height is negative
-     */
-     public Rectangle(int width, int height, Point topLeftPoint, Point cornerRadius) throws NegativeValueException {
-        this.topLeftPoint = topLeftPoint;
-        this.cornerRadius = cornerRadius;
         setWidth(width);
         setHeight(height);
     }
@@ -143,5 +133,53 @@ public class Rectangle extends SVGShape { // <rect>
         points.add(new Point(topLeftPoint.getX()+width, topLeftPoint.getY()-height));
         points.add(new Point(topLeftPoint.getX(), topLeftPoint.getY()-height));
         return points;
+    }
+
+    /**
+     * Creates a Rectangle shape based on the provided arguments.
+     *
+     * Expected arguments:
+     * - args[2] = width (required)
+     * - args[3] = height (required)
+     * - args[4] = x (top-left corner x-coordinate)
+     * - args[5] = y (top-left corner y-coordinate)
+     * - args[6] = rx (optional, corner radius x)
+     * - args[7] = ry (optional, corner radius y)
+     * - args[last] = fill (optional, only if total args is 7 or 9)
+     *
+     * Examples:
+     * - create rectangle 100 50 10 10
+     * - create rectangle 100 50 10 10 red
+     * - create rectangle 100 50 10 10 5 5
+     * - create rectangle 100 50 10 10 5 5 blue
+     *
+     * @param args Array of string arguments.
+     * @return A new Rectangle instance with the parsed parameters.
+     * @throws NegativeValueException if any size value is negative.
+     * @throws IllegalArgumentException if required arguments are missing or invalid.
+     */
+    public static SVGShape createRectangle(String[] args) throws NegativeValueException {
+        if (args.length < 6)
+            throw new IllegalArgumentException("Rectangle requires: width height x y");
+
+        int width = InputParser.parseIntegerSafely(args[2]);
+        int height = InputParser.parseIntegerSafely(args[3]);
+        int x = InputParser.parseIntegerSafely(args[4]);
+        int y = InputParser.parseIntegerSafely(args[5]);
+
+        Rectangle rect = new Rectangle(width, height, new Point(x, y)) ;
+
+        if (args.length >= 8) {
+            int rx = InputParser.parseIntegerSafely(args[6]);
+            int ry = InputParser.parseIntegerSafely(args[7]);
+            rect.setCornerRadius(new Point(rx, ry));
+        }
+
+        if (args.length == 7 || args.length == 9) {
+            String fill = args[args.length - 1];
+            rect.setFill(fill);
+        }
+
+        return rect;
     }
 }

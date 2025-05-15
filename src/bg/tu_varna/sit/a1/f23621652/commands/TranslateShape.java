@@ -3,6 +3,8 @@ package bg.tu_varna.sit.a1.f23621652.commands;
 import bg.tu_varna.sit.a1.f23621652.SVGCanvas;
 import bg.tu_varna.sit.a1.f23621652.interfaces.Command;
 import bg.tu_varna.sit.a1.f23621652.models.*;
+import bg.tu_varna.sit.a1.f23621652.parsers.InputParser;
+
 /**
  * Command implementation for translating a specific shape or all shapes on the canvas.
  */
@@ -19,8 +21,8 @@ public class TranslateShape implements Command {
         if(OpenFile.isOpened()) {
             //> translate 5 5
             //> translate 10 10 2
-            int transX = Integer.parseInt(arguments[1]);
-            int transY = Integer.parseInt(arguments[2]);
+            int transX = InputParser.parseIntegerSafely(arguments[1]);
+            int transY = InputParser.parseIntegerSafely(arguments[2]);
 
             if (arguments.length == 3) {
                 for (SVGShape shape : SVGCanvas.getInstance().getShapes()) {
@@ -28,7 +30,13 @@ public class TranslateShape implements Command {
                 }
                 System.out.println("Translated all shapes.");
             } else if (arguments.length == 4) {
-                int indexToTranslate = Integer.parseInt(arguments[3]);
+                int indexToTranslate = 0;
+                try {
+                    indexToTranslate = InputParser.parseIntegerSafely(arguments[3]);
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                    return;
+                }
                 SVGShape shapeToTranslate = SVGCanvas.getInstance().getShapes().get(indexToTranslate - 1);
                 findInstanceAndTranslate(shapeToTranslate, transX, transY);
                 System.out.println("Translated " + shapeToTranslate);
@@ -56,8 +64,8 @@ public class TranslateShape implements Command {
             ((Line) shape).setEndPoint(newEndPoint);
         }
         else if(shape instanceof Circle){
-            Point newCentrePoint = new Point(((Circle) shape).getCentrePoint().getX() + transX, ((Circle) shape).getCentrePoint().getY() + transY);
-            ((Circle) shape).setCentrePoint(newCentrePoint);
+            Point newCentrePoint = new Point(((Circle) shape).getCenterPoint().getX() + transX, ((Circle) shape).getCenterPoint().getY() + transY);
+            ((Circle) shape).setCenterPoint(newCentrePoint);
         }
         else if(shape instanceof Rectangle){
             Point newTopLeftPoint = new Point((((Rectangle) shape).getTopLeftPoint().getX() + transX), ((Rectangle) shape).getTopLeftPoint().getY() + transY);

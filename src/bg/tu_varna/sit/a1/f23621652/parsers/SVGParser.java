@@ -63,13 +63,13 @@ public class SVGParser {
         String fill = getAttr(line, "fill");
         try {
             Rectangle rect = new Rectangle(width, height, new Point(x, y));
-            if(!fill.equals("")) {
+            if(!fill.isEmpty()) {
                 rect.setFill(fill);
             }
             return rect;
 
         } catch (NegativeValueException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -86,13 +86,14 @@ public class SVGParser {
         int cy = getIntAttr(line, "cy");
         String fill = getAttr(line, "fill");
         try {
-            Circle circle = new Circle(r, new Point(cx, cy));
-            if(!fill.equals("")) {
+            Circle circle = new Circle(r);
+            circle.setCenterPoint(new Point(cx, cy));
+            if(!fill.isEmpty()) {
                 circle.setFill(fill);
             }
             return circle;
         } catch (NegativeValueException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -110,7 +111,7 @@ public class SVGParser {
         int y2 = getIntAttr(line, "y2");
         String stroke = getAttr(line, "stroke");
         Line l = new Line(new Point(x1, y1), new Point(x2, y2));
-        if(!stroke.equals("")) {
+        if(!stroke.isEmpty()) {
             l.setStroke(stroke);
         }
         return l;
@@ -128,18 +129,19 @@ public class SVGParser {
         String pointsAttr = getAttr(line, "points");  // "50,150 50,200 200,200"
         if (!pointsAttr.isEmpty()) {
             String[] pointPairs = pointsAttr.trim().split("\\s+"); // Split by space
+            int x, y;
             for (String pair : pointPairs) {
                 String[] coordinates = pair.split(",");
                 if (coordinates.length == 2) {
-                    int x = Integer.parseInt(coordinates[0]);
-                    int y = Integer.parseInt(coordinates[1]);
+                    x = InputParser.parseIntegerSafely(coordinates[0]);
+                    y = InputParser.parseIntegerSafely(coordinates[1]);
                     polygon.addPoint(new Point(x, y));
                 }
             }
         }
 
         String stroke = getAttr(line, "stroke");
-        if(!stroke.equals("")) {
+        if(!stroke.isEmpty()) {
             polygon.setStroke(stroke);
         }
         return polygon;
@@ -154,7 +156,7 @@ public class SVGParser {
      */
     private static int getIntAttr(String line, String attr) {
         String intValue = getAttr(line, attr);
-        return intValue.isEmpty() ? 0 : Integer.parseInt(intValue);
+        return intValue.isEmpty() ? 0 : InputParser.parseIntegerSafely(intValue);
     }
 
     /**

@@ -3,6 +3,7 @@ package bg.tu_varna.sit.a1.f23621652.commands;
 import bg.tu_varna.sit.a1.f23621652.SVGCanvas;
 import bg.tu_varna.sit.a1.f23621652.interfaces.Command;
 import bg.tu_varna.sit.a1.f23621652.models.SVGShape;
+import bg.tu_varna.sit.a1.f23621652.parsers.InputParser;
 
 import java.util.List;
 
@@ -20,7 +21,13 @@ public class EraseShape implements Command {
     @Override
     public void execute(String[] arguments) {
         if(OpenFile.isOpened()) {
-            int index = Integer.parseInt(arguments[1]);
+            int index = 0;
+            try {
+                index = InputParser.parseIntegerSafely(arguments[1]);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                return;
+            }
             List<SVGShape> shapes = SVGCanvas.getInstance().getShapes();
             try {
                 SVGShape shapeToErase = shapes.get(index - 1);

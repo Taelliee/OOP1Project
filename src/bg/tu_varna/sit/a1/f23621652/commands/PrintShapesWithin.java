@@ -8,6 +8,7 @@ import bg.tu_varna.sit.a1.f23621652.models.Circle;
 import bg.tu_varna.sit.a1.f23621652.models.Point;
 import bg.tu_varna.sit.a1.f23621652.models.Rectangle;
 import bg.tu_varna.sit.a1.f23621652.models.SVGShape;
+import bg.tu_varna.sit.a1.f23621652.parsers.InputParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,11 @@ public class PrintShapesWithin implements Command {
                 return;
             }
             ShapeType shapeWithin = ShapeType.convertFromText(arguments[1]);
+            SVGShape boundaryShape = getBoundaryShape(arguments, shapeWithin);
+            if (boundaryShape == null) {
+                return;
+            }
+
             List<Point> pointsToCheck = new ArrayList<>();
 
             boolean isAnythingWithin = false;
@@ -44,43 +50,20 @@ public class PrintShapesWithin implements Command {
 
                 boolean isWithin = false;
 
-                if (shapeWithin == ShapeType.RECTANGLE) {
-                    if (arguments.length != 6) {
-                        System.out.println("Please write the width, height and top left point! (width height x y)");
-                        return;
+                if(boundaryShape instanceof Rectangle) {
+                    if (shape instanceof Circle) {
+                        isWithin = checkPointsWithinRectangle(pointsToCheck, ((Rectangle) boundaryShape), ((Circle) shape).getRadius());
                     }
-                    int width = Integer.parseInt(arguments[2]);
-                    int height = Integer.parseInt(arguments[3]);
-                    int x1 = Integer.parseInt(arguments[4]);
-                    int y1 = Integer.parseInt(arguments[5]);
-                    try {
-                        Rectangle rect = new Rectangle(width, height, new Point(x1, y1));
-                        if (shape instanceof Circle) {
-                            isWithin = checkPointsWithinRectangle(pointsToCheck, rect, ((Circle) shape).getRadius());
-                        } else {
-                            isWithin = checkPointsWithinRectangle(pointsToCheck, rect, 0);
-                        }
-                    } catch (NumberFormatException | NegativeValueException e) {
-                        System.out.println(e.getMessage());
+                    else {
+                        isWithin = checkPointsWithinRectangle(pointsToCheck, ((Rectangle) boundaryShape), 0);
                     }
-                } else if (shapeWithin == ShapeType.CIRCLE) {
-                    if (arguments.length != 5) {
-                        System.out.println("Please write the radius and center point! (circle r cx cy)");
-                        return;
-                    }
-                    int r = Integer.parseInt(arguments[2]);
-                    int cx = Integer.parseInt(arguments[3]);
-                    int cy = Integer.parseInt(arguments[4]);
-                    try {
-                        Circle circle = new Circle(r, new Point(cx, cy));
-                        if (shape instanceof Circle) {
-                            isWithin = checkPointsWithinCircle(pointsToCheck, circle, ((Circle) shape).getRadius());
-                        } else {
-                            isWithin = checkPointsWithinCircle(pointsToCheck, circle, 0);
-                        }
+                }
 
-                    } catch (NumberFormatException | NegativeValueException e) {
-                        System.out.println(e.getMessage());
+                if(boundaryShape instanceof Circle) {
+                    if (shape instanceof Circle) {
+                        isWithin = checkPointsWithinCircle(pointsToCheck, ((Circle) boundaryShape), ((Circle) shape).getRadius());
+                    } else {
+                        isWithin = checkPointsWithinCircle(pointsToCheck, ((Circle) boundaryShape), 0);
                     }
                 }
 
@@ -96,6 +79,26 @@ public class PrintShapesWithin implements Command {
         else {
             System.out.println("File not opened! Cannot execute command.");
         }
+    }
+
+
+    private SVGShape getBoundaryShape(String[] arguments, ShapeType shapeWithin){
+        SVGShape boundaryShape = null;
+
+        if (shapeWithin == ShapeType.RECTANGLE) {
+            try {
+                boundaryShape = Rectangle.createRectangle(arguments);
+            } catch (IllegalArgumentException | NegativeValueException e) {
+                System.out.println(e.getMessage());
+            }
+        } else if (shapeWithin == ShapeType.CIRCLE) {
+            try {
+                boundaryShape = Circle.createCircle(arguments);
+            } catch (IllegalArgumentException | NegativeValueException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return boundaryShape;
     }
 
     /**
@@ -131,7 +134,7 @@ public class PrintShapesWithin implements Command {
      */
     private boolean checkPointsWithinCircle(List<Point> points, Circle circle, int radius){
         double distance;
-        Point circlePoint = circle.getCentrePoint();
+        Point circlePoint = circle.getCenterPoint();
 
         for (Point shapePoint : points) {
             distance = Math.sqrt(Math.pow(shapePoint.getX() - circlePoint.getX(), 2) + Math.pow(shapePoint.getY() - circlePoint.getY(), 2));

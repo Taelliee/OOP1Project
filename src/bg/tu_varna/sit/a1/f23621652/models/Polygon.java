@@ -1,5 +1,8 @@
 package bg.tu_varna.sit.a1.f23621652.models;
 
+import bg.tu_varna.sit.a1.f23621652.exceptions.NegativeValueException;
+import bg.tu_varna.sit.a1.f23621652.parsers.InputParser;
+
 import java.util.*;
 
 /**
@@ -61,5 +64,43 @@ public class Polygon extends SVGShape { // <polygon>
     @Override
     public List<Point> getPoints(){
         return this.points;
+    }
+
+    /**
+     * Creates a Polygon shape based on the provided arguments.
+     *
+     * Expected arguments:
+     * - args[2...] = alternating x and y coordinates (at least 3 pairs)
+     * - args[last] = fill (optional, if number of args is odd)
+     *
+     * Examples:
+     * - create polygon 100 10 150 190 50 190
+     * - create polygon 100 10 150 190 50 190 blue
+     *
+     * @param args Array of string arguments.
+     * @return A new Polygon instance with the parsed parameters.
+     * @throws IllegalArgumentException if not enough points are provided.
+     * @throws NumberFormatException if any coordinate is invalid.
+     */
+    public static SVGShape createPolygon(String[] args) throws NegativeValueException {
+        if (args.length < 8)
+            throw new IllegalArgumentException("Polygon must have at least 3 points (6 values).");
+
+        Polygon polygon = new Polygon();
+
+        int length = args.length;
+        if (length % 2 != 0) {
+            length--;
+            String fill = args[args.length - 1];
+            polygon.setFill(fill);
+        }
+
+        for (int i = 2; i < length; i += 2) {
+            int x = InputParser.parseIntegerSafely(args[i]);
+            int y = InputParser.parseIntegerSafely(args[i + 1]);
+            polygon.addPoint(new Point(x, y));
+        }
+
+        return polygon;
     }
 }

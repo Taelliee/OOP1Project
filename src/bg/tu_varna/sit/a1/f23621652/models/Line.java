@@ -1,5 +1,8 @@
 package bg.tu_varna.sit.a1.f23621652.models;
 
+import bg.tu_varna.sit.a1.f23621652.exceptions.NegativeValueException;
+import bg.tu_varna.sit.a1.f23621652.parsers.InputParser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,5 +72,42 @@ public class Line extends SVGShape {
         points.add(startPoint);
         points.add(endPoint);
         return points;
+    }
+
+    /**
+     * Creates a Line shape based on the provided arguments.
+     *
+     * Expected arguments:
+     * - args[2] = x1 (start point x-coordinate)
+     * - args[3] = y1 (start point y-coordinate)
+     * - args[4] = x2 (end point x-coordinate)
+     * - args[5] = y2 (end point y-coordinate)
+     * - args[6] = stroke (optional)
+     *
+     * Examples:
+     * - create line 0 0 100 100
+     * - create line 0 0 100 100 red
+     *
+     * @param args Array of string arguments.
+     * @return A new Line instance with the parsed parameters.
+     * @throws IllegalArgumentException if required arguments are missing or invalid.
+     */
+    public static SVGShape createLine(String[] args) throws NegativeValueException {
+        if (args.length < 6)
+            throw new IllegalArgumentException("Line requires: x1 y1 x2 y2");
+
+        int x1 = InputParser.parseIntegerSafely(args[2]);
+        int y1 = InputParser.parseIntegerSafely(args[3]);
+        int x2 = InputParser.parseIntegerSafely(args[4]);
+        int y2 = InputParser.parseIntegerSafely(args[5]);
+
+        Line line = new Line(new Point(x1, y1), new Point(x2, y2));
+
+        if (args.length == 7) {
+            String stroke = args[6];
+            line.setStroke(stroke);
+        }
+
+        return line;
     }
 }

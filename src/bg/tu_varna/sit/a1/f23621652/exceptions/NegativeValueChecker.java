@@ -23,8 +23,6 @@ public final class NegativeValueChecker {
      * @return true if the value is negative, false otherwise.
      */
     public static boolean isValueNegative(double value){
-        if(value < 0)
-            return true;
-        return false;
+        return value < 0;
     }
 }
