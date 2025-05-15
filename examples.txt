@@ -11,5 +11,5 @@ translate 10 10 2
 
 PRINT WITHIN:
 within rectangle 15 15 -10 10
-within circle 15 5 5
+within circle 60 0 0
 
