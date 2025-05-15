@@ -8,7 +8,6 @@ import bg.tu_varna.sit.a1.f23621652.models.Circle;
 import bg.tu_varna.sit.a1.f23621652.models.Point;
 import bg.tu_varna.sit.a1.f23621652.models.Rectangle;
 import bg.tu_varna.sit.a1.f23621652.models.SVGShape;
-import bg.tu_varna.sit.a1.f23621652.parsers.InputParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +80,15 @@ public class PrintShapesWithin implements Command {
         }
     }
 
-
+    /**
+     * Creates a boundary shape (rectangle or circle) from the given arguments.
+     *
+     * Used for commands that require checking whether other shapes lie within a boundary shape.
+     *
+     * @param arguments the input arguments to create the shape
+     * @param shapeWithin  the shape type to use as boundary (only rectangle or circle)
+     * @return a shape instance representing the boundary, or null if creation fails
+     */
     private SVGShape getBoundaryShape(String[] arguments, ShapeType shapeWithin){
         SVGShape boundaryShape = null;
 

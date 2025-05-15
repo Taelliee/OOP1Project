@@ -7,14 +7,20 @@ import bg.tu_varna.sit.a1.f23621652.models.*;
 
 /**
  * Command implementation for creating different types of SVG shapes.
+ * This class handles parsing of input arguments and assigns shape creation
+ * to the corresponding static creation methods of each shape.
  * Supports rectangle, circle, line, and polygon.
  */
 public class CreateShape implements Command {
 
-    /**
-     * Parses arguments and creates a shape accordingly, then adds it to the canvas.
+     /**
+     * Executes the command to create a shape.
      *
-     * @param arguments Array of string arguments describing the shape and its properties.
+     * The second argument should specify the shape type.
+     * Remaining arguments should match the parameters expected for that shape.
+     * If the shape is successfully created, it is added to the SVG canvas.
+     *
+     * @param arguments array of string inputs representing the shape type and parameters
      *                  Expected formats vary by shape type:
      *                  - rectangle width height x y [rx ry] [fill]
      *                  - circle r [cx cy] [fill]
