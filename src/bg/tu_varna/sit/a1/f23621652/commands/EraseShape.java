@@ -20,25 +20,25 @@ public class EraseShape implements Command {
      */
     @Override
     public void execute(String[] arguments) {
-        if(OpenFile.isOpened()) {
-            int index = 0;
-            try {
-                index = InputParser.parseIntegerSafely(arguments[1]);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-                return;
-            }
-            List<SVGShape> shapes = SVGCanvas.getInstance().getShapes();
-            try {
-                SVGShape shapeToErase = shapes.get(index - 1);
-                SVGCanvas.getInstance().eraseShape(shapeToErase);
-                System.out.println("Erased a " + shapeToErase.getClass().getSimpleName() + " (" + index + ")");
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("There is no shape with this index!");
-            }
-        }
-        else {
+        if (!OpenFile.isOpened()) {
             System.out.println("File not opened! Cannot execute command.");
+            return;
+        }
+
+        int index = 0;
+        try {
+            index = InputParser.parseIntegerSafely(arguments[1]);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        List<SVGShape> shapes = SVGCanvas.getInstance().getShapes();
+        try {
+            SVGShape shapeToErase = shapes.get(index - 1);
+            SVGCanvas.getInstance().eraseShape(shapeToErase);
+            System.out.println("Erased a " + shapeToErase.getClass().getSimpleName() + " (" + index + ")");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("There is no shape with this index!");
         }
     }
 }

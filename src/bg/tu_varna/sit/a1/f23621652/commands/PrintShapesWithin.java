@@ -28,55 +28,55 @@ public class PrintShapesWithin implements Command {
      */
     @Override
     public void execute(String[] arguments) {
-        if(OpenFile.isOpened()) {
-            if (arguments.length < 3 || ShapeType.convertFromText(arguments[1]) == null) {
-                System.out.println("Please choose a valid shape and write its attributes. (rectangle, circle, line, polygon)");
-                return;
-            }
-            ShapeType shapeWithin = ShapeType.convertFromText(arguments[1]);
-            SVGShape boundaryShape = getBoundaryShape(arguments, shapeWithin);
-            if (boundaryShape == null) {
-                return;
-            }
+        if (!OpenFile.isOpened()) {
+            System.out.println("File not opened! Cannot execute command.");
+            return;
+        }
 
-            List<Point> pointsToCheck = new ArrayList<>();
+        if (arguments.length < 3 || ShapeType.convertFromText(arguments[1]) == null) {
+            System.out.println("Please choose a valid shape and write its attributes. (rectangle, circle, line, polygon)");
+            return;
+        }
+        ShapeType shapeWithin = ShapeType.convertFromText(arguments[1]);
+        SVGShape boundaryShape = getBoundaryShape(arguments, shapeWithin);
+        if (boundaryShape == null) {
+            return;
+        }
 
-            boolean isAnythingWithin = false;
+        List<Point> pointsToCheck = new ArrayList<>();
 
-            for (SVGShape shape : SVGCanvas.getInstance().getShapes()) {
-                pointsToCheck.clear();
-                pointsToCheck.addAll(shape.getPoints());
+        boolean isAnythingWithin = false;
 
-                boolean isWithin = false;
+        for (SVGShape shape : SVGCanvas.getInstance().getShapes()) {
+            pointsToCheck.clear();
+            pointsToCheck.addAll(shape.getPoints());
 
-                if(boundaryShape instanceof Rectangle) {
-                    if (shape instanceof Circle) {
-                        isWithin = checkPointsWithinRectangle(pointsToCheck, ((Rectangle) boundaryShape), ((Circle) shape).getRadius());
-                    }
-                    else {
-                        isWithin = checkPointsWithinRectangle(pointsToCheck, ((Rectangle) boundaryShape), 0);
-                    }
+            boolean isWithin = false;
+
+            if(boundaryShape instanceof Rectangle) {
+                if (shape instanceof Circle) {
+                    isWithin = checkPointsWithinRectangle(pointsToCheck, ((Rectangle) boundaryShape), ((Circle) shape).getRadius());
                 }
-
-                if(boundaryShape instanceof Circle) {
-                    if (shape instanceof Circle) {
-                        isWithin = checkPointsWithinCircle(pointsToCheck, ((Circle) boundaryShape), ((Circle) shape).getRadius());
-                    } else {
-                        isWithin = checkPointsWithinCircle(pointsToCheck, ((Circle) boundaryShape), 0);
-                    }
-                }
-
-                if (isWithin) {
-                    System.out.println(shape);
-                    isAnythingWithin = true;
+                else {
+                    isWithin = checkPointsWithinRectangle(pointsToCheck, ((Rectangle) boundaryShape), 0);
                 }
             }
-            if (!isAnythingWithin) {
-                System.out.println("No shapes within!");
+
+            if(boundaryShape instanceof Circle) {
+                if (shape instanceof Circle) {
+                    isWithin = checkPointsWithinCircle(pointsToCheck, ((Circle) boundaryShape), ((Circle) shape).getRadius());
+                } else {
+                    isWithin = checkPointsWithinCircle(pointsToCheck, ((Circle) boundaryShape), 0);
+                }
+            }
+
+            if (isWithin) {
+                System.out.println(shape);
+                isAnythingWithin = true;
             }
         }
-        else {
-            System.out.println("File not opened! Cannot execute command.");
+        if (!isAnythingWithin) {
+            System.out.println("No shapes within!");
         }
     }
 

@@ -11,41 +11,41 @@ import bg.tu_varna.sit.a1.f23621652.parsers.InputParser;
 public class TranslateShape implements Command {
 
     /**
-     * Executes the translate command.
+     * Executes the Translate command.
      * Moves shapes by a specified x and y offset.
      *
      * @param arguments Arguments include x and y offset, and optionally an index for a specific shape.
      */
     @Override
     public void execute(String[] arguments) {
-        if(OpenFile.isOpened()) {
-            //> translate 5 5
-            //> translate 10 10 2
-            int transX = InputParser.parseIntegerSafely(arguments[1]);
-            int transY = InputParser.parseIntegerSafely(arguments[2]);
-
-            if (arguments.length == 3) {
-                for (SVGShape shape : SVGCanvas.getInstance().getShapes()) {
-                    findInstanceAndTranslate(shape, transX, transY);
-                }
-                System.out.println("Translated all shapes.");
-            } else if (arguments.length == 4) {
-                int indexToTranslate = 0;
-                try {
-                    indexToTranslate = InputParser.parseIntegerSafely(arguments[3]);
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                    return;
-                }
-                SVGShape shapeToTranslate = SVGCanvas.getInstance().getShapes().get(indexToTranslate - 1);
-                findInstanceAndTranslate(shapeToTranslate, transX, transY);
-                System.out.println("Translated " + shapeToTranslate);
-            } else {
-                System.out.println("Invalid number of arguments for translate command");
-            }
-        }
-        else {
+        if (!OpenFile.isOpened()) {
             System.out.println("File not opened! Cannot execute command.");
+            return;
+        }
+
+        //> translate 5 5
+        //> translate 10 10 2
+        int transX = InputParser.parseIntegerSafely(arguments[1]);
+        int transY = InputParser.parseIntegerSafely(arguments[2]);
+
+        if (arguments.length == 3) {
+            for (SVGShape shape : SVGCanvas.getInstance().getShapes()) {
+                findInstanceAndTranslate(shape, transX, transY);
+            }
+            System.out.println("Translated all shapes.");
+        } else if (arguments.length == 4) {
+            int indexToTranslate = 0;
+            try {
+                indexToTranslate = InputParser.parseIntegerSafely(arguments[3]);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                return;
+            }
+            SVGShape shapeToTranslate = SVGCanvas.getInstance().getShapes().get(indexToTranslate - 1);
+            findInstanceAndTranslate(shapeToTranslate, transX, transY);
+            System.out.println("Translated " + shapeToTranslate);
+        } else {
+            System.out.println("Invalid number of arguments for translate command");
         }
     }
 

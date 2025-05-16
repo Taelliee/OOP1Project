@@ -17,13 +17,12 @@ public class CloseFile implements Command {
      */
     @Override
     public void execute(String[] arguments) {
-        if(OpenFile.isOpened()){
-            SVGCanvas.getInstance().clearShapes();
-            OpenFile.setIsOpened(false);
-            System.out.println("Successfully closed " + ShapesFile.getFile().getName());
-        }
-        else {
+        if (!OpenFile.isOpened()) {
             System.out.println("File not opened! Cannot execute command.");
+            return;
         }
+        SVGCanvas.getInstance().clearShapes();
+        OpenFile.setIsOpened(false);
+        System.out.println("Successfully closed " + ShapesFile.getFile().getName());
     }
 }

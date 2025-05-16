@@ -45,24 +45,14 @@ public class CreateShape implements Command {
             return;
         }
 
-        SVGShape shape = null;
+        SVGShape shape;
         try {
-            switch (shapeType) {
-                case CIRCLE:
-                    shape = Circle.createCircle(arguments);
-                    break;
-                case RECTANGLE:
-                    shape = Rectangle.createRectangle(arguments);
-                    break;
-                case LINE:
-                    shape = Line.createLine(arguments);
-                    break;
-                case POLYGON:
-                    shape = Polygon.createPolygon(arguments);
-                    break;
-                default:
-                    throw new IllegalArgumentException();
-            }
+            shape = switch (shapeType) { //expression switch -> The whole switch expression returns a value, which is assigned to shape.
+                case CIRCLE -> Circle.createCircle(arguments);
+                case RECTANGLE -> Rectangle.createRectangle(arguments);
+                case LINE -> Line.createLine(arguments);
+                case POLYGON -> Polygon.createPolygon(arguments);
+            };
         } catch (Exception e) {
             System.out.println("Error creating shape: " + e.getMessage());
             return;
@@ -80,6 +70,6 @@ public class CreateShape implements Command {
     //4. create line 0 0 300 200
     //5. create polygon 100 10 150 190 50 190 yellow
 
-    // > create rectangle 10 20 -1000 -1000 yellow
+    // create rectangle 10 20 -1000 -1000 yellow
     // Successfully created rectangle (index)
 }

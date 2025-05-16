@@ -19,21 +19,21 @@ public class SaveAsAnotherFile implements Command {
      */
     @Override
     public void execute(String[] arguments) {
-        if(OpenFile.isOpened()){
-            if (arguments.length == 2) {
-                File newFile = new File(arguments[1]);
-                try {
-                    SVGFileWriter.saveToFile(newFile);
-                    System.out.println("Successfully saved as " + newFile.getName());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                System.out.println("Invalid number of arguments for Save As command (saveas path.svg)");
-            }
-        }
-        else {
+        if (!OpenFile.isOpened()) {
             System.out.println("File not opened! Cannot execute command.");
+            return;
+        }
+
+        if (arguments.length == 2) {
+            File newFile = new File(arguments[1]);
+            try {
+                SVGFileWriter.saveToFile(newFile);
+                System.out.println("Successfully saved as " + newFile.getName());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            System.out.println("Invalid number of arguments for Save As command (saveas path.svg)");
         }
     }
 }

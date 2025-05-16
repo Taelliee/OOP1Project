@@ -16,19 +16,19 @@ public class PrintShapes implements Command {
      */
     @Override
     public void execute(String[] arguments) {
-        if(OpenFile.isOpened()) {
-            if (SVGCanvas.getInstance().getShapes().isEmpty()) {
-                System.out.println("No shapes added yet!");
-            } else {
-                int index = 0;
-                for (SVGShape shape : SVGCanvas.getInstance().getShapes()) {
-                    index = SVGCanvas.getInstance().getShapes().indexOf(shape) + 1;
-                    System.out.println(index + ". " + shape);
-                }
-            }
-        }
-        else {
+        if (!OpenFile.isOpened()) {
             System.out.println("File not opened! Cannot execute command.");
+            return;
+        }
+
+        if (SVGCanvas.getInstance().getShapes().isEmpty()) {
+            System.out.println("No shapes added yet!");
+        } else {
+            int index = 0;
+            for (SVGShape shape : SVGCanvas.getInstance().getShapes()) {
+                index = SVGCanvas.getInstance().getShapes().indexOf(shape) + 1;
+                System.out.println(index + ". " + shape);
+            }
         }
     }
 }

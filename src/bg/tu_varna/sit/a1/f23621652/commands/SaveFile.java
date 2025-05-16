@@ -19,16 +19,15 @@ public class SaveFile implements Command {
      */
     @Override
     public void execute(String[] arguments) {
-        if(OpenFile.isOpened()) {
-            try {
-                SVGFileWriter.saveToFile(ShapesFile.getFile());
-                System.out.println("Successfully saved changes to " + ShapesFile.getFile().getName());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
+        if (!OpenFile.isOpened()) {
             System.out.println("File not opened! Cannot execute command.");
+            return;
+        }
+        try {
+            SVGFileWriter.saveToFile(ShapesFile.getFile());
+            System.out.println("Successfully saved changes to " + ShapesFile.getFile().getName());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
