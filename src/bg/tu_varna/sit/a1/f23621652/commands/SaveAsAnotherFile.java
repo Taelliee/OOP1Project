@@ -28,6 +28,7 @@ public class SaveAsAnotherFile implements Command {
             File newFile = new File(arguments[1]);
             try {
                 SVGFileWriter.saveToFile(newFile);
+                SVGFileWriter.setIsSaved(false);
                 System.out.println("Successfully saved as " + newFile.getName());
             } catch (IOException e) {
                 System.out.println(e.getMessage());

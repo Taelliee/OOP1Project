@@ -9,6 +9,16 @@ import java.io.*;
  * Utility class responsible for writing SVG shapes to a file in valid SVG format.
  */
 public class SVGFileWriter {
+    private static boolean isSaved = true;
+
+    public static boolean isSaved() {
+        return isSaved;
+    }
+
+    public static void setIsSaved(boolean isSaved) {
+        SVGFileWriter.isSaved = isSaved;
+    }
+
     /**
      * Writes the current SVG shapes from the canvas to the specified file.
      * The output is formatted as a valid SVG document.

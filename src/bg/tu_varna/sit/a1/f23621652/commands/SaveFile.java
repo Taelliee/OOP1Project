@@ -25,6 +25,7 @@ public class SaveFile implements Command {
         }
         try {
             SVGFileWriter.saveToFile(ShapesFile.getFile());
+            SVGFileWriter.setIsSaved(false);
             System.out.println("Successfully saved changes to " + ShapesFile.getFile().getName());
         } catch (IOException e) {
             System.out.println(e.getMessage());

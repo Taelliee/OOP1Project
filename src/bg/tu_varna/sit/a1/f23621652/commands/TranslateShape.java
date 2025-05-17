@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.a1.f23621652.commands;
 
 import bg.tu_varna.sit.a1.f23621652.SVGCanvas;
+import bg.tu_varna.sit.a1.f23621652.files.SVGFileWriter;
 import bg.tu_varna.sit.a1.f23621652.interfaces.Command;
 import bg.tu_varna.sit.a1.f23621652.models.*;
 import bg.tu_varna.sit.a1.f23621652.parsers.InputParser;
@@ -22,17 +23,23 @@ public class TranslateShape implements Command {
             System.out.println("File not opened! Cannot execute command.");
             return;
         }
-
+        int transX = 0, transY = 0;
         //> translate 5 5
         //> translate 10 10 2
-        int transX = InputParser.parseIntegerSafely(arguments[1]);
-        int transY = InputParser.parseIntegerSafely(arguments[2]);
+        try {
+            transX = InputParser.parseIntegerSafely(arguments[1]);
+            transY = InputParser.parseIntegerSafely(arguments[2]);
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return;
+        }
 
         if (arguments.length == 3) {
             for (SVGShape shape : SVGCanvas.getInstance().getShapes()) {
                 findInstanceAndTranslate(shape, transX, transY);
             }
             System.out.println("Translated all shapes.");
+            SVGFileWriter.setIsSaved(false);
         } else if (arguments.length == 4) {
             int indexToTranslate = 0;
             try {
@@ -43,6 +50,7 @@ public class TranslateShape implements Command {
             }
             SVGShape shapeToTranslate = SVGCanvas.getInstance().getShapes().get(indexToTranslate - 1);
             findInstanceAndTranslate(shapeToTranslate, transX, transY);
+            SVGFileWriter.setIsSaved(false);
             System.out.println("Translated " + shapeToTranslate);
         } else {
             System.out.println("Invalid number of arguments for translate command");

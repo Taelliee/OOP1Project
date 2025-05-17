@@ -2,6 +2,7 @@ package bg.tu_varna.sit.a1.f23621652.commands;
 
 import bg.tu_varna.sit.a1.f23621652.SVGCanvas;
 import bg.tu_varna.sit.a1.f23621652.enums.ShapeType;
+import bg.tu_varna.sit.a1.f23621652.files.SVGFileWriter;
 import bg.tu_varna.sit.a1.f23621652.interfaces.Command;
 import bg.tu_varna.sit.a1.f23621652.models.*;
 
@@ -60,6 +61,7 @@ public class CreateShape implements Command {
 
         SVGCanvas.getInstance().addShape(shape);
         int index = SVGCanvas.getInstance().getShapes().indexOf(shape) + 1;
+        SVGFileWriter.setIsSaved(false);
         System.out.println("Successfully created " + shapeType + " (" + index + ")");
     }
 
