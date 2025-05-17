@@ -35,7 +35,7 @@ public class CreateShape implements Command {
         }
 
         if (arguments.length < 2) {
-            System.out.println("Please choose a valid shape and write its attributes. (rectangle, circle, line, polygon)");
+            System.out.println("Invalid arguments. Please choose a shape and write its attributes (rectangle, circle, line, polygon)");
             return;
         }
 

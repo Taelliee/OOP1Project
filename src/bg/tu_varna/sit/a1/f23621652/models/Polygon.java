@@ -91,7 +91,7 @@ public class Polygon extends SVGShape { // <polygon>
         int length = args.length;
         if (length % 2 != 0) {
             length--;
-            String fill = args[args.length - 1];
+            String fill = args[length];
             polygon.setFill(fill);
         }
 
