@@ -23,7 +23,10 @@ public class SaveAsAnotherFile implements Command {
             System.out.println("File not opened! Cannot execute command.");
             return;
         }
-
+        if(SVGFileWriter.isSaved()){
+            System.out.println("No changes were made!");
+            return;
+        }
         if (arguments.length == 2) {
             File newFile = new File(arguments[1]);
             try {

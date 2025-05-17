@@ -1,6 +1,5 @@
 package bg.tu_varna.sit.a1.f23621652.commands;
 
-import bg.tu_varna.sit.a1.f23621652.exceptions.CommandAbortedException;
 import bg.tu_varna.sit.a1.f23621652.files.SVGFileWriter;
 import bg.tu_varna.sit.a1.f23621652.interfaces.Command;
 
@@ -19,10 +18,9 @@ public class ExitProgram implements Command {
     public void execute(String[] arguments) {
         if(!SVGFileWriter.isSaved()) {
             Command close = new CloseFile();
-            try {
-                close.execute(null);
-            } catch (CommandAbortedException e) {
-                System.out.println("Exit aborted: " + e.getMessage());
+            close.execute(null);
+            if(CloseFile.isCommandAborted()) {
+                System.out.println("Exit aborted.");
                 return;
             }
         }

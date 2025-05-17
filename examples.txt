@@ -5,13 +5,14 @@ create rectangle 10 10 100 -60 5 5 pink
 create line 0 0 300 200 red
 create polygon 100 10 150 190 50 190 yellow
 
+create circle -10
 create circle 10.5 5 5 blue
 create rectangle 5 5.7 -10 10 green
+create rectangle 5 -5 10 10 green
 
 TRANSLATE:
 translate 5 5
 translate 10 10 2
-
 translate 10 10 1.6
 
 PRINT WITHIN:
@@ -22,5 +23,6 @@ within circle -60 0 0
 within circle 60.6 0 0
 
 ERASE:
+erase 1
 erase 1.5
 

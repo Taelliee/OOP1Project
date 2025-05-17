@@ -23,6 +23,10 @@ public class SaveFile implements Command {
             System.out.println("File not opened! Cannot execute command.");
             return;
         }
+        if(SVGFileWriter.isSaved()){
+            System.out.println("No changes were made!");
+            return;
+        }
         try {
             SVGFileWriter.saveToFile(ShapesFile.getFile());
             SVGFileWriter.setIsSaved(false);

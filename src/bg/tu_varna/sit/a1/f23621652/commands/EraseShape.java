@@ -26,6 +26,11 @@ public class EraseShape implements Command {
             return;
         }
 
+        if (arguments.length < 2) {
+            System.out.println("Invalid arguments. Please choose an index to erase.");
+            return;
+        }
+
         int index = 0;
         try {
             index = InputParser.parseIntegerSafely(arguments[1]);

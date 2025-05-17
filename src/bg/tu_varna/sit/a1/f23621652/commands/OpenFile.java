@@ -40,6 +40,10 @@ public class OpenFile implements Command {
      */
     @Override
     public void execute(String[] arguments) {
+        if (OpenFile.isOpened()) {
+            System.out.println("File is already opened (" + ShapesFile.getFile() + ")");
+            return;
+        }
         if(arguments.length != 2){
             System.out.println("Invalid arguments for Open File command!");
             return;

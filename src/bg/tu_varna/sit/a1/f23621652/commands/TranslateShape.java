@@ -23,6 +23,12 @@ public class TranslateShape implements Command {
             System.out.println("File not opened! Cannot execute command.");
             return;
         }
+
+        if (arguments.length < 3) {
+            System.out.println("Invalid arguments. Please choose a horizontal and vertical value.");
+            return;
+        }
+
         int transX = 0, transY = 0;
         //> translate 5 5
         //> translate 10 10 2
@@ -80,7 +86,7 @@ public class TranslateShape implements Command {
             ((Rectangle) shape).setTopLeftPoint(newTopLeftPoint);
         }
         else if(shape instanceof Polygon){
-            for (Point point : ((Polygon) shape).getPoints()) {
+            for (Point point : shape.getPoints()) {
                 point.setX(point.getX() + transX);
                 point.setY(point.getY() + transY);
             }

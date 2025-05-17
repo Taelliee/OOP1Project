@@ -1,7 +1,6 @@
 package bg.tu_varna.sit.a1.f23621652.commands;
 
 import bg.tu_varna.sit.a1.f23621652.SVGCanvas;
-import bg.tu_varna.sit.a1.f23621652.exceptions.CommandAbortedException;
 import bg.tu_varna.sit.a1.f23621652.files.SVGFileWriter;
 import bg.tu_varna.sit.a1.f23621652.interfaces.Command;
 import bg.tu_varna.sit.a1.f23621652.files.ShapesFile;
@@ -13,6 +12,16 @@ import java.util.Scanner;
  * After closing, no further commands can be executed except opening a file again.
  */
 public class CloseFile implements Command {
+    private static boolean isCommandAborted = false;
+
+    public static boolean isCommandAborted() {
+        return isCommandAborted;
+    }
+
+    public static void setIsCommandAborted(boolean isCommandAborted) {
+        CloseFile.isCommandAborted = isCommandAborted;
+    }
+
     /**
      * Executes the close file operation.
      * Clears all shapes from the canvas and marks the file as closed.
@@ -29,28 +38,29 @@ public class CloseFile implements Command {
             System.out.println("Do you want to save changes before closing the file? (yes/no/cancel)");
             Scanner input = new Scanner(System.in);
             String[] inputTokens = input.nextLine().trim().split("\\s+");
-
             switch (inputTokens[0]) {
-                case "yes":
-                case "y":
+                case "yes", "y" -> {
                     Command save = new SaveFile();
                     save.execute(null);
-                    break;
-                case "no":
-                case "n":
-                    System.out.println("Closing the file without saving...");
-                    break;
-                case "cancel":
-                    //Unchecked exceptions do not require a try-catch block where they are thrown.
-                    throw new CommandAbortedException("Close file operation cancelled by user.");
-                default:
+                }
+                case "no", "n" -> System.out.println("Closing the file without saving...");
+                case "cancel" -> {
+                    System.out.println("Operation cancelled by user.");
+                    isCommandAborted = true;
+                    return;
+                }
+                default -> {
                     System.out.println("Invalid argument!");
-                    throw new CommandAbortedException("Invalid input for close file.");
+                    isCommandAborted = true;
+                    return;
+                }
             }
         }
 
         SVGCanvas.getInstance().clearShapes();
         OpenFile.setIsOpened(false);
+        SVGFileWriter.setIsSaved(true);
+        isCommandAborted = false;
         System.out.println("Successfully closed " + ShapesFile.getFile().getName());
     }
 }
