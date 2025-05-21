@@ -23,8 +23,10 @@ public class PrintShapesWithin implements Command {
      * dimensions and position must be provided as arguments.
      *
      * @param arguments The arguments that specify the boundary shape type and its parameters.
+     *                  <pre>
      *                  For a rectangle: width, height, x, y.
      *                  For a circle: radius, cx, cy.
+     *                  </pre>
      */
     @Override
     public void execute(String[] arguments) {
@@ -82,7 +84,6 @@ public class PrintShapesWithin implements Command {
 
     /**
      * Creates a boundary shape (rectangle or circle) from the given arguments.
-     *
      * Used for commands that require checking whether other shapes lie within a boundary shape.
      *
      * @param arguments the input arguments to create the shape

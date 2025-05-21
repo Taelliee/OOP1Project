@@ -8,7 +8,6 @@ package bg.tu_varna.sit.a1.f23621652.parsers;
 public class InputParser {
     /**
      * Parses a string input into an integer.
-     *
      * If the input cannot be parsed as an integer, an IllegalArgumentException is thrown
      * with a descriptive error message.
      *

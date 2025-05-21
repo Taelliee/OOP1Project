@@ -91,7 +91,7 @@ public class Circle extends SVGShape{
 
     /**
      * Creates a Circle shape based on the provided arguments.
-     *
+     *<pre>
      * Expected arguments:
      * - args[2] = radius (required)
      * - args[3] = cx (optional, center x-coordinate)
@@ -103,7 +103,7 @@ public class Circle extends SVGShape{
      * - create circle 50 100 200
      * - create circle 50 blue
      * - create circle 50 100 200 blue
-     *
+     *</pre>
      * @param args Array of string arguments.
      * @return A new Circle instance with the parsed parameters.
      * @throws NegativeValueException if radius is negative.

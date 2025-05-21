@@ -137,7 +137,7 @@ public class Rectangle extends SVGShape { // <rect>
 
     /**
      * Creates a Rectangle shape based on the provided arguments.
-     *
+     *<pre>
      * Expected arguments:
      * - args[2] = width (required)
      * - args[3] = height (required)
@@ -152,7 +152,7 @@ public class Rectangle extends SVGShape { // <rect>
      * - create rectangle 100 50 10 10 red
      * - create rectangle 100 50 10 10 5 5
      * - create rectangle 100 50 10 10 5 5 blue
-     *
+     *</pre>
      * @param args Array of string arguments.
      * @return A new Rectangle instance with the parsed parameters.
      * @throws NegativeValueException if any size value is negative.

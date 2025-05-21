@@ -76,7 +76,7 @@ public class Line extends SVGShape {
 
     /**
      * Creates a Line shape based on the provided arguments.
-     *
+     *<pre>
      * Expected arguments:
      * - args[2] = x1 (start point x-coordinate)
      * - args[3] = y1 (start point y-coordinate)
@@ -87,7 +87,7 @@ public class Line extends SVGShape {
      * Examples:
      * - create line 0 0 100 100
      * - create line 0 0 100 100 red
-     *
+     *</pre>
      * @param args Array of string arguments.
      * @return A new Line instance with the parsed parameters.
      * @throws IllegalArgumentException if required arguments are missing or invalid.

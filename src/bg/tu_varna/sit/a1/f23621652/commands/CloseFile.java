@@ -24,6 +24,15 @@ public class CloseFile implements Command {
 
     /**
      * Executes the close file operation.
+     If there are unsaved changes, it prompts the user to decide whether to:
+     * <ul>
+     *   <li>Save the changes before closing (by typing "yes" or "y")</li>
+     *   <li>Close without saving (by typing "no" or "n")</li>
+     *   <li>Cancel the operation entirely (by typing "cancel")</li>
+     * </ul>
+     * Any invalid input will also result in canceling the operation.
+     * After a successful close, it clears all shapes from the canvas,
+     * marks the file as closed, and resets the save state.
      * Clears all shapes from the canvas and marks the file as closed.
      *
      * @param arguments Not used in this command.

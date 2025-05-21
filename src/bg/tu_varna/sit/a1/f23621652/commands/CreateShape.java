@@ -22,11 +22,13 @@ public class CreateShape implements Command {
      * If the shape is successfully created, it is added to the SVG canvas.
      *
      * @param arguments array of string inputs representing the shape type and parameters
+      *                 <pre>
      *                  Expected formats vary by shape type:
      *                  - rectangle width height x y [rx ry] [fill]
      *                  - circle r [cx cy] [fill]
      *                  - line x1 y1 x2 y2 [stroke]
      *                  - polygon x1 y1 x2 y2 ... [fill]
+      *                  </pre>
      */
     @Override
     public void execute(String[] arguments) {

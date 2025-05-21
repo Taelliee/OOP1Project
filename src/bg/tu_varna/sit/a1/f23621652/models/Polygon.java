@@ -68,7 +68,7 @@ public class Polygon extends SVGShape { // <polygon>
 
     /**
      * Creates a Polygon shape based on the provided arguments.
-     *
+     *<pre>
      * Expected arguments:
      * - args[2...] = alternating x and y coordinates (at least 3 pairs)
      * - args[last] = fill (optional, if number of args is odd)
@@ -76,7 +76,7 @@ public class Polygon extends SVGShape { // <polygon>
      * Examples:
      * - create polygon 100 10 150 190 50 190
      * - create polygon 100 10 150 190 50 190 blue
-     *
+     *</pre>
      * @param args Array of string arguments.
      * @return A new Polygon instance with the parsed parameters.
      * @throws IllegalArgumentException if not enough points are provided.

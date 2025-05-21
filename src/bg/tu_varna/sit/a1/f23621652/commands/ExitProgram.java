@@ -10,8 +10,10 @@ public class ExitProgram implements Command {
 
     /**
      * Executes the exit operation.
-     * Terminates the program immediately.
-     *
+     * If there are unsaved changes, this command invokes the {@link CloseFile} command
+     * to prompt the user to save, discard, or cancel the operation.
+     * If the user cancels or provides invalid input during the close process, the exit is aborted.
+     * Otherwise, the program terminates after the file is properly closed or the user decides to discard changes.
      * @param arguments Not used in this command.
      */
     @Override
