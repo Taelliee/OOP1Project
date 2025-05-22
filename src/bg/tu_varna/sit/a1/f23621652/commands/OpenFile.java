@@ -48,8 +48,14 @@ public class OpenFile implements Command {
             System.out.println("Invalid arguments for Open File command!");
             return;
         }
+
+        String filename = arguments[1];
+        if (!ShapesFile.isSVGFile(filename)) {
+            System.out.println("Invalid file format. Only .svg files are supported.");
+            return;
+        }
         try {
-            ShapesFile.setFile(new File(arguments[1]));
+            ShapesFile.setFile(new File(filename));
             if(ShapesFile.getFile().exists()){
                 SVGParser.parseShapes();
                 System.out.println("Successfully opened " + ShapesFile.getFile().getName());

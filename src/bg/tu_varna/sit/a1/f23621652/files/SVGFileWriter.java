@@ -32,7 +32,7 @@ public class SVGFileWriter {
         textToWrite.append("<?xml version=\"1.0\" standalone=\"no\"?>\n")
                 .append("<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n")
                 .append(" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n")
-                .append("<svg>\n");
+                .append("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"320\" height=\"240\" viewBox=\"0 0 320 240\">\n");
         for (SVGShape shape : SVGCanvas.getInstance().getShapes()) {
             textToWrite.append(" ").append(shape.toSVGFormat()).append("\n");
         }

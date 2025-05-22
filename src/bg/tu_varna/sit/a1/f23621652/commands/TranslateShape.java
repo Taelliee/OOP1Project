@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.a1.f23621652.commands;
 
 import bg.tu_varna.sit.a1.f23621652.SVGCanvas;
+import bg.tu_varna.sit.a1.f23621652.exceptions.NegativeValueException;
 import bg.tu_varna.sit.a1.f23621652.files.SVGFileWriter;
 import bg.tu_varna.sit.a1.f23621652.interfaces.Command;
 import bg.tu_varna.sit.a1.f23621652.models.*;
@@ -42,7 +43,12 @@ public class TranslateShape implements Command {
 
         if (arguments.length == 3) {
             for (SVGShape shape : SVGCanvas.getInstance().getShapes()) {
-                findInstanceAndTranslate(shape, transX, transY);
+                try {
+                    findInstanceAndTranslate(shape, transX, transY);
+                } catch (NegativeValueException e) {
+                    System.out.println(e.getMessage());
+                    return;
+                }
             }
             System.out.println("Translated all shapes.");
             SVGFileWriter.setIsSaved(false);
@@ -55,7 +61,12 @@ public class TranslateShape implements Command {
                 return;
             }
             SVGShape shapeToTranslate = SVGCanvas.getInstance().getShapes().get(indexToTranslate - 1);
-            findInstanceAndTranslate(shapeToTranslate, transX, transY);
+            try {
+                findInstanceAndTranslate(shapeToTranslate, transX, transY);
+            } catch (NegativeValueException e) {
+                System.out.println(e.getMessage());
+                return;
+            }
             SVGFileWriter.setIsSaved(false);
             System.out.println("Translated " + shapeToTranslate);
         } else {
@@ -70,7 +81,7 @@ public class TranslateShape implements Command {
      * @param transX Horizontal offset.
      * @param transY Vertical offset.
      */
-    private void findInstanceAndTranslate(SVGShape shape, int transX, int transY){
+    private void findInstanceAndTranslate(SVGShape shape, int transX, int transY) throws NegativeValueException {
         if(shape instanceof Line){
             Point newStartPoint = new Point((((Line) shape).getStartPoint().getX() + transX), ((Line) shape).getStartPoint().getY() + transY);
             ((Line) shape).setStartPoint(newStartPoint);

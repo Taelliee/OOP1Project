@@ -40,10 +40,6 @@ public class SVGParser {
                     shapes.add(parsePolygon(line));
                 }
             }
-
-            for (SVGShape s : shapes) {
-                System.out.println(s);
-            }
         } catch (IOException e) {
             System.out.println("Error reading file: " + e.getMessage());
         }
@@ -110,7 +106,12 @@ public class SVGParser {
         int x2 = getIntAttr(line, "x2");
         int y2 = getIntAttr(line, "y2");
         String stroke = getAttr(line, "stroke");
-        Line l = new Line(new Point(x1, y1), new Point(x2, y2));
+        Line l = null;
+        try {
+            l = new Line(new Point(x1, y1), new Point(x2, y2));
+        } catch (NegativeValueException e) {
+            System.out.println(e.getMessage());
+        }
         if(!stroke.isEmpty()) {
             l.setStroke(stroke);
         }
@@ -135,14 +136,18 @@ public class SVGParser {
                 if (coordinates.length == 2) {
                     x = InputParser.parseIntegerSafely(coordinates[0]);
                     y = InputParser.parseIntegerSafely(coordinates[1]);
-                    polygon.addPoint(new Point(x, y));
+                    try {
+                        polygon.addPoint(new Point(x, y));
+                    } catch (NegativeValueException e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
         }
 
-        String stroke = getAttr(line, "stroke");
-        if(!stroke.isEmpty()) {
-            polygon.setStroke(stroke);
+        String fill = getAttr(line, "fill");
+        if(!fill.isEmpty()) {
+            polygon.setFill(fill);
         }
         return polygon;
     }

@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.a1.f23621652.commands;
 
 import bg.tu_varna.sit.a1.f23621652.files.SVGFileWriter;
+import bg.tu_varna.sit.a1.f23621652.files.ShapesFile;
 import bg.tu_varna.sit.a1.f23621652.interfaces.Command;
 
 import java.io.File;
@@ -28,10 +29,15 @@ public class SaveAsAnotherFile implements Command {
             return;
         }
         if (arguments.length == 2) {
-            File newFile = new File(arguments[1]);
+            String filename = arguments[1];
+            if (!ShapesFile.isSVGFile(filename)) {
+                System.out.println("Invalid file format. Only .svg files are supported.");
+                return;
+            }
+            File newFile = new File(filename);
             try {
                 SVGFileWriter.saveToFile(newFile);
-                SVGFileWriter.setIsSaved(false);
+                SVGFileWriter.setIsSaved(true);
                 System.out.println("Successfully saved as " + newFile.getName());
             } catch (IOException e) {
                 System.out.println(e.getMessage());

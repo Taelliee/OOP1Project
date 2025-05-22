@@ -1,0 +1,19 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="240" viewBox="0 0 320 240">
+ <polygon points="60,180 260,180 230,210 90,210" fill="saddlebrown" />
+ <rect width="5" height="105" x="155" y="75" />
+ <polygon points="160,85 220,140 160,175" fill="lightgray" />
+ <circle r="8" cx="130" cy="195" fill="steelblue" />
+ <circle r="8" cx="160" cy="195" fill="steelblue" />
+ <circle r="8" cx="190" cy="195" fill="steelblue" />
+ <polygon points="160,75 175,80 160,85" fill="red" />
+ <line x1="10" y1="210" x2="310" y2="210" stroke="teal" />
+ <circle r="20" cx="70" cy="50" fill="lightblue" />
+ <circle r="20" cx="90" cy="50" fill="lightblue" />
+ <circle r="20" cx="80" cy="40" fill="lightblue" />
+ <circle r="20" cx="230" cy="50" fill="lightblue" />
+ <circle r="20" cx="250" cy="50" fill="lightblue" />
+ <circle r="20" cx="240" cy="40" fill="lightblue" />
+</svg>

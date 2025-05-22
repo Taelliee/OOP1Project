@@ -70,7 +70,7 @@ public class Circle extends SVGShape{
         StringBuilder sb = new StringBuilder("<circle");
         sb.append(" r=\"").append(radius).append("\"");
         sb.append(" cx=\"").append(centerPoint.getX()).append("\"");
-        sb.append(" cy=\"").append(centerPoint.getX()).append("\"");
+        sb.append(" cy=\"").append(centerPoint.getY()).append("\"");
         sb.append(super.toSVGFormat());
         sb.append(" />");
 

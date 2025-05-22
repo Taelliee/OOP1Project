@@ -25,4 +25,8 @@ public class ShapesFile {
     public static void setFile(File file) {
         ShapesFile.file = file;
     }
+
+    public static boolean isSVGFile(String filename) {
+        return filename.toLowerCase().endsWith(".svg");
+    }
 }

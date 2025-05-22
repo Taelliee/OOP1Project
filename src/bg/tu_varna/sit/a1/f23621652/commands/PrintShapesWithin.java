@@ -121,8 +121,10 @@ public class PrintShapesWithin implements Command {
     private boolean checkPointsWithinRectangle(List<Point> points, Rectangle rect, int radius){
         Point rectPoint = rect.getTopLeftPoint();
         for (Point shapePoint : points) {
-            if(shapePoint.getX() - radius < rectPoint.getX() || shapePoint.getX() + radius > rectPoint.getX() + rect.getWidth() ||
-                    shapePoint.getY() + radius > rectPoint.getY() || shapePoint.getY() - radius < rectPoint.getY() - rect.getHeight()){
+            if(shapePoint.getX() - radius < rectPoint.getX() ||
+                    shapePoint.getX() + radius > rectPoint.getX() + rect.getWidth() ||
+                    shapePoint.getY() + radius < rectPoint.getY() ||
+                    shapePoint.getY() - radius > rectPoint.getY() + rect.getHeight()){
                 return false;
             }
         }

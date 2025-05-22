@@ -129,9 +129,13 @@ public class Rectangle extends SVGShape { // <rect>
     public List<Point> getPoints(){
         List<Point> points = new ArrayList<>();
         points.add(topLeftPoint);
-        points.add(new Point(topLeftPoint.getX()+width, topLeftPoint.getY()));
-        points.add(new Point(topLeftPoint.getX()+width, topLeftPoint.getY()-height));
-        points.add(new Point(topLeftPoint.getX(), topLeftPoint.getY()-height));
+        try {
+            points.add(new Point(topLeftPoint.getX()+width, topLeftPoint.getY())); //top right
+            points.add(new Point(topLeftPoint.getX()+width, topLeftPoint.getY()+height)); //bottom right
+            points.add(new Point(topLeftPoint.getX(), topLeftPoint.getY()+height)); //bottom left
+        } catch (NegativeValueException e) {
+            System.out.println(e.getMessage());
+        }
         return points;
     }
 
