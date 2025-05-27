@@ -1,21 +1,23 @@
 CREATE:
-create rectangle 15 15 15 -15 green
-create circle 10 45 25 blue
-create rectangle 10 10 100 60 1 1 pink
-create line 0 0 300 200 red
-create polygon 100 10 150 190 50 190 yellow
+create circle 20 185 25 hotpink
+create rectangle 140 100 10 10 1 1 pink
+create line 20 10 70 20 green
+create polygon 180 100 130 90 110 130 purple
 
+create rectangle 15 15 15 -15 green
 create circle -10
 create circle 10.5 5 5 blue
 create rectangle 5 5.7 -10 10 green
 create rectangle 5 -5 10 10 green
 
 TRANSLATE:
+translate -30 0 4
 translate 5 5
 translate 10 10 2
 translate 10 10 1.6
 
 PRINT WITHIN:
+within rectangle 140 100 10 10
 within rectangle 25 25 155 75
 within circle 60 70 50
 

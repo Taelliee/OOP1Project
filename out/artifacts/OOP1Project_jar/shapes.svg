@@ -1,11 +1,12 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="240" viewBox="0 0 320 240"> <polygon points="100,10 150,190 50,190" fill="yellow" />
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="240" viewBox="0 0 320 240">
+ <polygon points="100,10 150,190 50,190" fill="yellow" />
  <rect width="15" height="15" x="15" y="15" fill="green" />
  <line x1="0" y1="0" x2="300" y2="200" stroke="red" />
  <circle r="10" cx="45" cy="45" fill="blue" />
  <circle r="10" cx="145" cy="145" fill="blue" />
- <rect width="10" height="10" x="100" y="60" rx="1" ry="1" fill="pink" />
+ <rect width="10" height="10" x="100" y="60" rx="2" ry="2" fill="pink" />
  <line x1="20" y1="30" x2="30" y2="40" stroke="pink" />
 </svg>

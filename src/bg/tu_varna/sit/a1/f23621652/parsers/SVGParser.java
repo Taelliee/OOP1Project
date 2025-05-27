@@ -56,9 +56,12 @@ public class SVGParser {
         int height = getIntAttr(line, "height");
         int x = getIntAttr(line, "x");
         int y = getIntAttr(line, "y");
+        int rx = getIntAttr(line, "rx");
+        int ry = getIntAttr(line, "ry");
         String fill = getAttr(line, "fill");
         try {
             Rectangle rect = new Rectangle(width, height, new Point(x, y));
+            rect.setCornerRadius(new Point(rx, ry));
             if(!fill.isEmpty()) {
                 rect.setFill(fill);
             }
